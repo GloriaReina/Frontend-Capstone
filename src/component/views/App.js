@@ -1,17 +1,20 @@
 import React from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-
+import { BrowserRouter as Routes, Route, Outlet } from "react-router-dom";
+import {Login} from "../authentication/Login"
+import {Register} from "../authentication/Register"
+import {TaskList} from "../task/TaskList"
 
 
 function App() {
   return (
-    <Router>
-      <Switch>
-        {/* <Route path="/" exact component={Login} />
+    <Routes>
+      <Route>
+        <Route path="/" exact component={Login}/>
+        <Outlet />
         <Route path="/register" component={Register} />
-        <Route path="/tasklist" component={TaskList} /> */}
-      </Switch>
-    </Router>
+        <Route path="/tasklist" component={TaskList} />
+      </Route>
+    </Routes>
   );
 };
 
