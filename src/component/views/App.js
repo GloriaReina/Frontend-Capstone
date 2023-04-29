@@ -1,18 +1,19 @@
-import React from "react";
-import {Routes, Route, Outlet } from "react-router-dom";
+import {Routes, Route } from "react-router-dom";
 import {Login} from "../authentication/Login"
 import {Register} from "../authentication/Register"
 import {TaskList} from "../task/TaskList"
+import { Authorized } from "./Authorized";
 
 
 function App() {
   return (
     <Routes>
       
-        <Route path="/login" exact component={Login}/>
-        <Route path="/register" component={Register} />
-        <Route path="/tasklist" component={TaskList} />
-      
+        <Route path="/login" element={<Login/>}/>
+        <Route path="/register" element={<Register />} />
+        <Route path="/tasklist" element={<TaskList />} />
+
+      <Route path="*" element={<Authorized />} />
     </Routes>
   );
 };
