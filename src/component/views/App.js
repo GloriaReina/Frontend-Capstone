@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter as Routes, Route, Outlet } from "react-router-dom";
+import {Routes, Route, Outlet } from "react-router-dom";
 import {Login} from "../authentication/Login"
 import {Register} from "../authentication/Register"
 import {TaskList} from "../task/TaskList"
@@ -8,12 +8,11 @@ import {TaskList} from "../task/TaskList"
 function App() {
   return (
     <Routes>
-      <Route>
-        <Route path="/" exact component={Login}/>
-        <Outlet />
+      
+        <Route path="/login" exact component={Login}/>
         <Route path="/register" component={Register} />
         <Route path="/tasklist" component={TaskList} />
-      </Route>
+      
     </Routes>
   );
 };
