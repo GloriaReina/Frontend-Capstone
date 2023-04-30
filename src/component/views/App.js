@@ -8,17 +8,51 @@ import { Authorized } from "./Authorized";
 function App() {
   return (
     <Routes>
-      
-        <Route path="/login" element={<Login/>}/>
-        <Route path="/register" element={<Register />} />
-        <Route path="/tasklist" element={<TaskList />} />
+      <Route path="/login" element={<Login/>}/> 
+      <Route path="/register" element={<Register />} />
+      <Route path="*" element={
+        <Authorized>
+            <>
+              <div className="content-container">
+                  <TaskList/>
+              </div>
 
-      <Route path="*" element={<Authorized />} />
+            </>
+        </Authorized >
+          } />
+      
     </Routes>
   );
 };
 
 export default App;
+
+
+
+
+
+
+// function App() {
+//   return (
+//     <Routes>
+
+//         <Route path="*" element={
+//         <Authorized>
+//           <>
+//           <Login/> 
+//           <Register/>
+//           <div className="content-container">
+//           {/* <TaskList/> */}
+//           </div>
+//           </>
+//           </Authorized >
+//           } />
+//        <Route path="/tasklist" element={<TaskList />} />
+//       </Routes>
+//   );
+// };
+
+// export default App;
 
 
 // This was already in here for help
