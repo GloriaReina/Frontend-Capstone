@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Dropdown } from 'react-bootstrap';
-import { TaskForm } from './TaskForm';
+// import { TaskForm } from './TaskForm';
+// import { TodayTasks } from './TodayTasks';
 
 export const AllTasks = () => {
   const [tasks, setTasks] = useState([]);
@@ -20,13 +21,13 @@ export const AllTasks = () => {
     fetchAllTasks();
   }, []);
 
-  // ---------------->/*PROPS */------------------//
+  // // ---------------->/*PROPS */------------------//
   
-  // passing function to TaskForm component so that after form is submited/POST new object,we can update page with current state i.e user can see the new task they just added
+  // // passing function to TaskForm component so that after form is submited/POST new object,we can update page with current state i.e user can see the new task they just added
 
-  const taskSubmitted = () => {
-    fetchAllTasks();
-  };
+  // const taskSubmitted = () => {
+  //   fetchAllTasks();
+  // };
   // ---------------->/*PROPS */------------------//
 
     /* 
@@ -49,19 +50,19 @@ export const AllTasks = () => {
     }
 
     if (filter === 'urgency level 1') {
-      return task.urgency === 1;
+      return task.urgency === "1";
     }
 
     if (filter === 'urgency level 2') {
-        return task.urgency === 2;
+        return task.urgency === "2";
       }
 
     if (filter === 'urgency level 3') {
-        return task.urgency === 3;
+        return task.urgency === "3";
       }
 
     if (filter === 'urgency level 4') {
-        return task.urgency === 4;
+        return task.urgency === "4";
       }
       if (filter === 'Self Care Tasks') {
         return task.category === "1";
@@ -80,8 +81,11 @@ export const AllTasks = () => {
 
  return (
   <>
-  {/* need to wrap it in div so that task form does not display on Task page since you are calling it in order to pass it taskSubmitted */}
-<div style={{ display: "none" }}><TaskForm taskSubmitted={taskSubmitted} /></div>
+  {/* need to wrap it in div so that task form does not display on Task page since you are calling it in order to pass it taskSubmitted
+  
+  If have extra time...just create a parent component later to hold state*/}
+{/* <div style={{ display: "none" }}><TaskForm taskSubmitted={taskSubmitted} /></div>
+<div style={{ display: "none" }}><TodayTasks tasks={tasks} /></div> */}
 
 
     <Dropdown>
