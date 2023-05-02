@@ -80,8 +80,9 @@ export const AllTasks = () => {
 
  return (
   <>
+  {/* need to wrap it in div so that task form does not display on Task page since you are calling it in order to pass it taskSubmitted */}
+<div style={{ display: "none" }}><TaskForm taskSubmitted={taskSubmitted} /></div>
 
-<TaskForm taskSubmitted={taskSubmitted} />
 
     <Dropdown>
       <Dropdown.Toggle variant="primary" id="dropdown-basic">

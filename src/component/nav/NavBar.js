@@ -15,9 +15,9 @@ export const NavBar = () => {
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
                 <Nav className="ms-auto">
-                    <NavLink href="/homepage" bsPrefix="nav-link-custom">HomePage</NavLink>
+                    <NavLink  href="/" bsPrefix="nav-link-custom">HomePage</NavLink>
     
-                    <NavLink href="/tasks" bsPrefix="nav-link-custom"> Tasks</NavLink>
+                    <NavLink  href="/tasks" bsPrefix="nav-link-custom"> Tasks</NavLink>
     
                     <NavLink href="/visuals"  bsPrefix="nav-link-custom">Visuals</NavLink>
                     

@@ -40,7 +40,7 @@ export const TaskForm = ({ taskSubmitted }) => {
         deadline: task.deadline,
         estimatedTime:task.estimatedTime,
         actualTime:task.actualTime,
-        complete: false,
+        completed: false,
       };
   
       // Perform fetch() to POST the object to the API
@@ -74,7 +74,7 @@ export const TaskForm = ({ taskSubmitted }) => {
   
     return (
 <>
-      {isFormVisible}
+      {/* {isFormVisible} */}
       <Container>
 
         <div className="add-new-task-button">
@@ -82,7 +82,7 @@ export const TaskForm = ({ taskSubmitted }) => {
                 bsPrefix="newtask-button"
                 variant="success"
                 block={false}
-                onClick={toggleAddTaskForm}
+                onClick= {toggleAddTaskForm}
               >
                 + New Task
               </ButtonToolbar>
