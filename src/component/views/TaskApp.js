@@ -1,34 +1,34 @@
-import {Routes, Route } from "react-router-dom";
-import {Login} from "../authentication/Login"
-import {Register} from "../authentication/Register"
-import {TaskList} from "../task/TaskList"
+// import { Route, Router, Routes } from "react-router-dom"
+import 'bootstrap/dist/css/bootstrap.min.css'
+import { Login } from "../authentication/Login";
+import { Register } from "../authentication/Register";
 import { Authorized } from "./Authorized";
+import { NavBar } from "../nav/NavBar";
+import { ApplicationViews } from "./ApplicationViews";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom"
 
 
-function App() {
-  return (
-    <Routes>
-      <Route path="/login" element={<Login/>}/> 
-      <Route path="/register" element={<Register />} />
-      <Route path="*" element={
-        <Authorized>
+export const TaskApp= () => {
+  return <Router>
+  
+  <Routes>
+
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+
+        <Route path="*" element={
+          <Authorized>
             <>
-              <div className="content-container">
-                  <TaskList/>
-              </div>
-
-            </>
-        </Authorized >
-          } />
-      
-    </Routes>
-  );
-};
-
-export default App;
-
-
-
+              <NavBar />    
+              <ApplicationViews />  
+              
+               
+          </>
+          </Authorized>
+        } />
+      </Routes>
+      </Router>
+}
 
 
 
@@ -39,11 +39,11 @@ export default App;
 //         <Route path="*" element={
 //         <Authorized>
 //           <>
-//           <Login/> 
+//           <Login/>
 //           <Register/>
-//           <div className="content-container">
+//
 //           {/* <TaskList/> */}
-//           </div>
+//
 //           </>
 //           </Authorized >
 //           } />
@@ -53,7 +53,6 @@ export default App;
 // };
 
 // export default App;
-
 
 // This was already in here for help
 // function App() {
@@ -78,5 +77,3 @@ export default App;
 // }
 
 // export default App;
-
-

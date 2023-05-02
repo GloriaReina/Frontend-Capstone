@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { useNavigate } from "react-router-dom"
+import { useNavigate, Link } from "react-router-dom"
 import { Row, Container, Col } from "react-bootstrap"
 import "./Login.css"
 
@@ -21,7 +21,7 @@ export const Register = (props) => {
             .then(res => res.json())
             .then(createdUser => {
                 if (createdUser.hasOwnProperty("id")) {
-                    localStorage.setItem("nutshell_user", JSON.stringify({
+                    localStorage.setItem("app_user", JSON.stringify({
                         id: createdUser.id
                     }))
 
@@ -76,6 +76,11 @@ export const Register = (props) => {
                         <button type="submit" className="sign-in-button"> Register </button>
                     </fieldset>
                 </form>
+                <section className="link--login">
+                <Link to="/login" className="login-link sansSerif">
+                  Already a member?
+                </Link>
+              </section>
         </Col>
         </Row>
         </Container>

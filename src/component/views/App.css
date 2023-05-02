@@ -1,0 +1,18 @@
+.container {
+    display: flex;
+    border: 1px solid black;
+  }
+  
+  .navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 200px;
+   
+  }
+  
+  .content {
+    flex: 1;
+    margin-left: 200px; /* Add a margin equal to the width of the navbar */
+  }
