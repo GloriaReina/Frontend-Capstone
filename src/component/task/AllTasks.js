@@ -120,7 +120,7 @@ export const AllTasks = () => {
 
     <Dropdown>
       <Dropdown.Toggle variant="primary" id="dropdown-basic">
-        Select Task List Display
+        Select Display Option
       </Dropdown.Toggle>
       <Dropdown.Menu>
         <Dropdown.Item onClick={() => setFilter('all')}>All tasks</Dropdown.Item>

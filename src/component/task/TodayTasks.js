@@ -1,8 +1,13 @@
 import { EditForm } from './EditForm';
+import './TodayTasks.css';
 
-export const TodayTasks = ({ tasks, fetchAllTasks }) => {
-  //   const [currentDate, setCurrentDate] = useState(new Date());
 
+
+
+export const TodayTasks = ({ tasks, fetchAllTasks }) => 
+
+{
+ 
   /*Function that filters the list of tasks based on the current date & 
     returns a new array that contains only the tasks that are due on the current date.*/
 
@@ -32,8 +37,10 @@ the getDate method returns the day of the month based on the local time zone of 
       <ul>
         {filteredTasks.map((task) => (
           <>
+          {/* add a CSS class based on urgency level of each task--use to color-code tasks based off */}
+           <div className={`task-item urgency-${task.urgencyLevel}`}>
           <li key={task.id}>{task.description} </li>
-          g
+          </div>
           <EditForm task={task}
                   fetchAllTasks={fetchAllTasks}
                   //  //pass fetchALLTasks prop EditForm component so that it can use it after the PUT request to update page with current state; and task so it can have access to task object for edits

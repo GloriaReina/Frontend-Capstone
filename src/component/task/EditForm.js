@@ -4,8 +4,9 @@ import { Button, Form, CloseButton, Col,Row } from "react-bootstrap";
 // task/taskSubmitted prop received from Homepage
 export const EditForm = ({task,fetchAllTasks}) => {
 
+    // added the "||"" to prevent undefined error....because initial state doesnt match input value?
   const [isEditing, setIsEditing] = useState(false);
-  const [editDescription, setEditDescription] = useState(task.description);
+  const [editDescription, setEditDescription] = useState(task.description || "");
   const [editUrgency, setEditUrgency] = useState(task.urgencyLevel);
   const [editCategory, setEditCategory] = useState(task.category);
   const [editDeadline, setEditDeadline] = useState(task.deadline);
@@ -15,7 +16,7 @@ export const EditForm = ({task,fetchAllTasks}) => {
 
   // this will be executed whenever the task object changes
   useEffect(() => {
-    setEditDescription(task.description);
+    setEditDescription(task.description|| "");
     setEditCategory(task.category);
     setEditUrgency(task.urgencyLevel);
     setEditEstimatedTime(task.estimatedTime);
@@ -50,7 +51,7 @@ export const EditForm = ({task,fetchAllTasks}) => {
     event.preventDefault();
 
     const editedTaskData = {
-      description: editDescription,
+      description: editDescription || "",
       deadline: editDeadline,
       category:editCategory,
       urgencyLevel:editUrgency,
