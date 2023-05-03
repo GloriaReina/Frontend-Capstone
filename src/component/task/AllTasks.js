@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { Dropdown } from 'react-bootstrap';
+import { Dropdown, Form } from 'react-bootstrap';
 // import { TaskForm } from './TaskForm';
 // import { TodayTasks } from './TodayTasks';
+import { EditForm } from './EditForm';
 
 export const AllTasks = () => {
   const [tasks, setTasks] = useState([]);
@@ -22,14 +23,20 @@ export const AllTasks = () => {
   }, []);
 
   // // ---------------->/*PROPS */------------------//
-  
-  // // passing function to TaskForm component so that after form is submited/POST new object,we can update page with current state i.e user can see the new task they just added
-
-  // const taskSubmitted = () => {
-  //   fetchAllTasks();
-  // };
+  /* This updateTaskDisplayed Function is passed to the EditForm component where it is called in the handleSaveClick funtion after the PUT request. All the tasks displayed to user to be updated with the edited info = show the task as it now is in state*/
   // ---------------->/*PROPS */------------------//
+ 
+    const updateTaskDisplayed = (editedTask) => {
+      setTasks(
+        (prevTasks) =>
+          prevTasks.map((task) =>
+          // if the task id matches the updated task id, return the updated task, otherwise return the task
+            task.id === editedTask.id ? editedTask : task
+          ) 
+      );
+    };
 
+    
     /* 
     When user selects an option from the dropdown menu, the onclick event will cause the state variable to be updated to one of the conditional statements below
 
@@ -50,19 +57,19 @@ export const AllTasks = () => {
     }
 
     if (filter === 'urgency level 1') {
-      return task.urgency === "1";
+      return task.urgencyLevel === "1";
     }
 
     if (filter === 'urgency level 2') {
-        return task.urgency === "2";
+        return task.urgencyLevel === "2";
       }
 
     if (filter === 'urgency level 3') {
-        return task.urgency === "3";
+        return task.urgencyLevel === "3";
       }
 
     if (filter === 'urgency level 4') {
-        return task.urgency === "4";
+        return task.urgencyLevel === "4";
       }
       if (filter === 'Self Care Tasks') {
         return task.category === "1";
@@ -79,6 +86,29 @@ export const AllTasks = () => {
     return true;
   });
 
+  const handleTaskCompletion = (taskId) => {
+    const updatedTasks = tasks.map((task) => {
+      if (task.id === taskId) {
+        return { ...task, completed: true };
+      }
+      return task;
+    });
+
+    setTasks(updatedTasks);
+
+    const updatedTask = updatedTasks.find((task) => task.id === taskId);
+    fetch(`http://localhost:8088/tasks/${taskId}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(updatedTask),
+    }).then(() => {
+      // After updating fetch the updated tasks
+      fetchAllTasks();
+    });
+  };
+
  return (
   <>
   {/* need to wrap it in div so that task form does not display on Task page since you are calling it in order to pass it taskSubmitted
@@ -90,7 +120,7 @@ export const AllTasks = () => {
 
     <Dropdown>
       <Dropdown.Toggle variant="primary" id="dropdown-basic">
-        All Tasks
+        Select Task List Display
       </Dropdown.Toggle>
       <Dropdown.Menu>
         <Dropdown.Item onClick={() => setFilter('all')}>All tasks</Dropdown.Item>
@@ -124,7 +154,24 @@ export const AllTasks = () => {
       </Dropdown.Menu>
       <ul>
         {filteredTasks.map((task) => (
+          <>
+          {/* sent task and fetchAllTasks as props to EditForm */}
+          <EditForm
+                  task={task}
+                  fetchAllTasks={fetchAllTasks}
+                  updateTaskDisplayed={updateTaskDisplayed}
+                />
           <li key={task.id}>{task.description}</li>
+          <li> 
+            <input
+              type="checkbox"
+              label="Mark task as complete"
+              checked={task.completed}
+              onChange={() => handleTaskCompletion(task.id)} />
+            
+      </li>
+      </>
+      
         ))}
       </ul>
     </Dropdown>

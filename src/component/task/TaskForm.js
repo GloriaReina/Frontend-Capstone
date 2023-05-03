@@ -1,13 +1,7 @@
-import { useState, useEffect } from "react";
-import {
-  Button,
-  Form,
-  Container,
-  Row,
-  Col,
-  CloseButton,
-  ButtonToolbar,
-} from "react-bootstrap";
+import { useState } from "react";
+import {Button,Form,Container,Row,Col,CloseButton} from "react-bootstrap";
+import { EditForm } from "./EditForm";
+
 
 export const TaskForm = ({ taskSubmitted}) => {
   /*
@@ -85,7 +79,10 @@ export const TaskForm = ({ taskSubmitted}) => {
 
   return (
     <>
-  
+   {/* passing to EditForm so form can use the state variable and the function to allow edit button to display/hide form when clicked  */}
+  {isFormVisible && (<EditForm toggleAddTaskForm={toggleAddTaskForm}
+        />
+      )}
       <Container>
         <Form>
         <div className="add-new-task-button">
