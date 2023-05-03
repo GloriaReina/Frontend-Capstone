@@ -36,7 +36,7 @@ export const AllTasks = () => {
       );
     };
 
-    
+
     /* 
     When user selects an option from the dropdown menu, the onclick event will cause the state variable to be updated to one of the conditional statements below
 
@@ -161,7 +161,7 @@ export const AllTasks = () => {
                   fetchAllTasks={fetchAllTasks}
                   updateTaskDisplayed={updateTaskDisplayed}
                 />
-          <li key={task.id}>{task.description}</li>
+          <li key={task.id}>{`${task.description} by ${task.deadline}`}</li>
           <li> 
             <input
               type="checkbox"

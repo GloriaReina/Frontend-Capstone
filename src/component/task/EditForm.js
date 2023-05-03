@@ -1,12 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { Button, Form, CloseButton } from "react-bootstrap";
+import { Button, Form, CloseButton, Col,Row } from "react-bootstrap";
 
 // task/taskSubmitted prop received from Homepage
-export const EditForm = ({
-    task= { description: "", deadline: "",completed:"", actualTime:"",estimatedTime:"",category:"",urgencyLevel:""},
-    fetchAllTasks,
-    updateTaskDisplayed
-}) => {
+export const EditForm = ({task,fetchAllTasks}) => {
 
   const [isEditing, setIsEditing] = useState(false);
   const [editDescription, setEditDescription] = useState(task.description);
@@ -19,7 +15,7 @@ export const EditForm = ({
 
   // this will be executed whenever the task object changes
   useEffect(() => {
-    setEditTask(task.description);
+    setEditDescription(task.description);
     setEditCategory(task.category);
     setEditUrgency(task.urgencyLevel);
     setEditEstimatedTime(task.estimatedTime);
@@ -28,9 +24,12 @@ export const EditForm = ({
     setEditDeadline(task.deadline);
   }, [task]);
 
+//   displays edit form
   const handleEditClick = () => {
     setIsEditing(true);
   };
+
+  //   hides edit form
   const handleCloseIconClick = () => {
     setIsEditing(false);
   };
@@ -69,7 +68,6 @@ export const EditForm = ({
     })
       .then((response) => response.json())
       .then((editedTask) => {
-        updateTaskDisplayed(editedTask);
         fetchAllTasks();
         setIsEditing(false);
       });
@@ -86,25 +84,80 @@ export const EditForm = ({
             ></CloseButton>
           </div>
           <Form.Group className="task-form-group">
-            <Form.Label className="task-form-label">Task:</Form.Label>
+            <Form.Label className="task-form-label">Description:</Form.Label>
             <Form.Control
               type="text"
               required
-              value={editTask}
-              onChange={(event) => setEditTask(event.target.value)}
-              placeholder="Enter new task"
+              value={editDescription}
+              onChange={(event) => setEditDescription(event.target.value)}
+              placeholder="Enter task description"
             />
           </Form.Group>
           <Form.Group className="task-form-group">
-            <Form.Label className="task-form-label">Due Date:</Form.Label>
+            <Form.Label className="task-form-label">Deadline:</Form.Label>
             <Form.Control
               type="date"
               required
-              value={editDueDate}
-              onChange={(event) => setEditDueDate(event.target.value)}
+              value={editDeadline}
+              onChange={(event) => setEditDeadline(event.target.value)}
               placeholder="Select due date"
             />
-          </Form.Group>
+          </Form.Group >
+          <Form.Group as={Row} controlId="category" className="task-form-group">
+            <Form.Label column sm={2} className="task-form-label">
+              Category:
+            </Form.Label>
+            <Col sm={10}>
+              <Form.Control
+                as="select"
+                required
+                value={editCategory}
+                onChange={(event) => setEditCategory(event.target.value)}
+              >
+                <option value="">-- Select Category --</option>
+                <option value="1">Self care</option>
+                <option value="2">Family life</option>
+                <option value="3">Work life</option>
+              </Form.Control>
+            </Col>
+            </Form.Group>
+            <Form.Group as={Row} controlId="urgency" className="task-form-group">
+            <Form.Label column sm={2} className="task-form-label">
+              Urgency:
+            </Form.Label>
+            <Col sm={10}>
+              <Form.Control
+                as="select"
+                required
+                value={editUrgency}
+                onChange={(event) => setEditUrgency(event.target.value)}
+              >
+                <option value="">-- Select Urgency --</option>
+                <option value="1">Urgent and Important</option>
+                <option value="2">Urgent but not important</option>
+                <option value="3">Not Urgent but important</option>
+                <option value="4">Not Urgent and Not important</option>
+              </Form.Control>
+            </Col>
+            </Form.Group>
+            <Form.Group className="task-form-group">
+            <Form.Label className="task-form-label">Estimated Time:</Form.Label>
+            <Form.Control
+              type="text"
+              required
+              value={task.estimatedTime}
+              onChange={(event) => setEditEstimatedTime(event.target.value)}
+              placeholder="Length of time needed (min) "/>
+            </Form.Group>
+            <Form.Group className="task-form-group">
+            <Form.Label className="task-form-label">Completion Time:</Form.Label>
+            <Form.Control
+              type="text"
+              required
+              value={task.actualTime}
+              onChange={(event) => setEditActualTime(event.target.value)}
+              placeholder="Length of time needed (min) "/>
+              </Form.Group>
           <Button
             variant="success"
             bsPrefix="save-task-button"

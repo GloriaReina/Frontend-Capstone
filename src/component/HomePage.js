@@ -1,7 +1,7 @@
 import { useState, useEffect} from "react";
 import { TaskForm } from "./task/TaskForm";
 import { TodayTasks } from "./task/TodayTasks";
-// import { EditForm } from "./task/EditForm";
+
 
 export const HomePage = ()=>{
     
@@ -9,7 +9,7 @@ export const HomePage = ()=>{
 
   /* Fetched all tasks in data base and assigned data to state variable "tasks"*/
   const fetchAllTasks = () => {
-    fetch(`http://localhost:8088/tasks`)
+    return fetch(`http://localhost:8088/tasks`)
       .then((response) => response.json())
       .then((tasksArray) => {
         setTasks(tasksArray);
@@ -22,18 +22,18 @@ export const HomePage = ()=>{
 
   // ---------------->/*PROPS */------------------//
   
-  // passing function to TaskForm/EditForm component so that after form is submited/POST/PUT new object,we can update page with current state i.e user can see the new task they just added
+  // passing fetchAllTasks function to TaskForm/TodayTasks component so that after form is submitted/POSTwe can update page with current state i.e user can see the new task they just added
+  
+  //TodayTask will take the fetchALLTasks prop and pass it to the EditForm component so that it can use it after the PUT request to update page with current state
 
-  const taskSubmitted = () => {
-    fetchAllTasks();
-  };
+
   // ---------------->/*PROPS */------------------//
     
     return(
         <>
-        <TaskForm taskSubmitted={taskSubmitted}/>
-        <TodayTasks tasks={tasks} />
-        {/* <EditForm tasks={tasks} taskSubmitted={taskSubmitted}/> */}
+        <TaskForm fetchAllTasks={fetchAllTasks}/>
+        <TodayTasks tasks={tasks} fetchAllTasks={fetchAllTasks} />
+        
         </>
         
     )

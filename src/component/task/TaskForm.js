@@ -3,7 +3,7 @@ import {Button,Form,Container,Row,Col,CloseButton} from "react-bootstrap";
 import { EditForm } from "./EditForm";
 
 
-export const TaskForm = ({ taskSubmitted}) => {
+export const TaskForm = ({ fetchAllTasks}) => {
   /*
           TODO: Add the correct default properties to the
           initial state object
@@ -57,7 +57,7 @@ export const TaskForm = ({ taskSubmitted}) => {
       .then((response) => response.json())
       .then(() => {
         /*update page with current list of tasks */
-        taskSubmitted();
+        fetchAllTasks();
       })
       .then(() => {
         /* update function resets form fields to default values so user can submit another task without having to manually clear the form */
@@ -140,9 +140,9 @@ export const TaskForm = ({ taskSubmitted}) => {
                 }}
               >
                 <option value="">-- Select Category --</option>
-                <option value="Self care">Self care</option>
-                <option value="family-life">Family life</option>
-                <option value="work-life">Work life</option>
+                <option value="1">Self care</option>
+                <option value="2">Family life</option>
+                <option value="3">Work life</option>
               </Form.Control>
             </Col>
           </Form.Group>

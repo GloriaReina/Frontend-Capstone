@@ -1,4 +1,6 @@
-export const TodayTasks = ({ tasks }) => {
+import { EditForm } from './EditForm';
+
+export const TodayTasks = ({ tasks, fetchAllTasks }) => {
   //   const [currentDate, setCurrentDate] = useState(new Date());
 
   /*Function that filters the list of tasks based on the current date & 
@@ -24,13 +26,21 @@ the getDate method returns the day of the month based on the local time zone of 
   const filteredTasks = filterTasksByDate();
 
   return (
+    <>
     <div>
       <h1>Tasks due today:</h1>
       <ul>
         {filteredTasks.map((task) => (
-          <li key={task.id}>{task.description}</li>
+          <>
+          <li key={task.id}>{task.description} </li>
+          g
+          <EditForm task={task}
+                  fetchAllTasks={fetchAllTasks}
+                  //  //pass fetchALLTasks prop EditForm component so that it can use it after the PUT request to update page with current state; and task so it can have access to task object for edits
+                  />
+          </>
         ))}
       </ul>
     </div>
-  );
-};
+  </>
+)}
