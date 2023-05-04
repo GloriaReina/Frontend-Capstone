@@ -18,7 +18,7 @@ export const VisualLineGraph = () => {
     const[chartTaskData, setChartTaskData] = useState([]);
 
 
-const fetchDataAllTasks = () => {
+    const fetchDataAllTasks = () => {
     return fetch(`http://localhost:8088/tasks`)
       .then((response) => response.json())
       .then((tasksArrayData) => {
@@ -94,7 +94,10 @@ const tasksPastWeek = filterTaskArrayData.filter(task => {
       }
     };
   
-    return <Line data={data} options={options} />;
+    return <div style={{width:600, height:300}}>
+
+        <Line data={data} options={options} />
+    </div> 
   };
   
   export default VisualLineGraph;

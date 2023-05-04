@@ -2,6 +2,7 @@ import { Outlet, Route, Routes } from "react-router-dom";
 import { AllTasks } from "../task/AllTasks";
 import { HomePage } from "../HomePage";
 import VisualLineGraph from "../datavisual/VisualLineGraph";
+import VisualPieChart from "../datavisual/VisualPieChart";
 
 
 
@@ -20,7 +21,12 @@ export const ApplicationViews = () => {
 
       </Route>
       <Route path="tasks" element={<AllTasks />} />
-      <Route path="visuals" element={<VisualLineGraph />} />
+      <Route path="visuals" element={
+      <>
+      <VisualLineGraph />
+      <VisualPieChart />
+      </>
+      }/>
     </Routes>
   );
 };
