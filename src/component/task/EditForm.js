@@ -6,7 +6,7 @@ export const EditForm = ({task,fetchAllTasks, handleTaskCompletion}) => {
 
     // added the "||"" to prevent undefined error....because initial state doesnt match input value?
   const [isEditing, setIsEditing] = useState(false);
-  const [editDescription, setEditDescription] = useState(task.description || "");
+  const [editDescription, setEditDescription] = useState(task.description);
   const [editUrgency, setEditUrgency] = useState(task.urgencyLevel);
   const [editCategory, setEditCategory] = useState(task.category);
   const [editDeadline, setEditDeadline] = useState(task.deadline);
@@ -16,7 +16,7 @@ export const EditForm = ({task,fetchAllTasks, handleTaskCompletion}) => {
 
   // this will be executed whenever the task object changes
   useEffect(() => {
-    setEditDescription(task.description|| "");
+    setEditDescription(task.description);
     setEditCategory(task.category);
     setEditUrgency(task.urgencyLevel);
     setEditEstimatedTime(task.estimatedTime);
@@ -35,6 +35,8 @@ export const EditForm = ({task,fetchAllTasks, handleTaskCompletion}) => {
     setIsEditing(false);
   };
 
+  
+ 
 
   // this is the DELETE request to remove a task from the database
   const handleDeleteTask = (id) => {

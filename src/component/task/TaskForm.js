@@ -3,7 +3,12 @@ import {Button,Form,Container,Row,Col,CloseButton} from "react-bootstrap";
 import { EditForm } from "./EditForm";
 
 
+
+
+
 export const TaskForm = ({ fetchAllTasks}) => {
+
+  const [isEditFormVisible, setIsEditFormVisible] = useState(false);
   /*
           TODO: Add the correct default properties to the
           initial state object
@@ -27,6 +32,8 @@ export const TaskForm = ({ fetchAllTasks}) => {
     setIsFormVisible(!isFormVisible);
    
   };
+
+
 
   const localAppUser = localStorage.getItem("app_user");
   const appUserObject = JSON.parse(localAppUser);
@@ -80,7 +87,7 @@ export const TaskForm = ({ fetchAllTasks}) => {
   return (
     <>
    {/* passing to EditForm so form can use the state variable and the function to allow edit button to display/hide form when clicked  */}
-  {isFormVisible && (<EditForm toggleAddTaskForm={toggleAddTaskForm}
+  {isEditFormVisible && (<EditForm 
         />
       )}
       <Container>

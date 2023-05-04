@@ -1,6 +1,9 @@
 import { Outlet, Route, Routes } from "react-router-dom";
 import { AllTasks } from "../task/AllTasks";
 import { HomePage } from "../HomePage";
+import VisualLineGraph from "../datavisual/VisualLineGraph";
+
+
 
 //render the <TicketList> component with  a <Route> component.
 
@@ -17,6 +20,7 @@ export const ApplicationViews = () => {
 
       </Route>
       <Route path="tasks" element={<AllTasks />} />
+      <Route path="visuals" element={<VisualLineGraph />} />
     </Routes>
   );
 };
