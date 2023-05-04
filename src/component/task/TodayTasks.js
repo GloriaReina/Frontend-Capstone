@@ -30,16 +30,26 @@ the getDate method returns the day of the month based on the local time zone of 
 
   const filteredTasks = filterTasksByDate();
 
+  /*  new array (sortedFilteredTasks) takes a copy of the (filteredTask array) which holds tasks due on current day and sorts these tasks by urgency level.
+  
+  a and b = two elements of the array being compared, if a-b<0, a is displayed first, if >0, b is displayed first, if = 0 nothing changes
+  */
+
+  const sortedFilteredTasks = [...filteredTasks].sort((a, b) => a.urgencyLevel - b.urgencyLevel);
+
+
+
   return (
     <>
     <div>
       <h1>Tasks due today:</h1>
       <ul>
-        {filteredTasks.map((task) => (
+        {sortedFilteredTasks.map((task) => (
           <>
           {/* add a CSS class based on urgency level of each task--use to color-code tasks based off */}
            <div className={`task-item urgency-${task.urgencyLevel}`}>
           <li key={task.id}>{task.description} </li>
+          
           </div>
           <EditForm task={task}
                   fetchAllTasks={fetchAllTasks}

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Button, Form, CloseButton, Col,Row } from "react-bootstrap";
 
 // task/taskSubmitted prop received from Homepage
-export const EditForm = ({task,fetchAllTasks}) => {
+export const EditForm = ({task,fetchAllTasks, handleTaskCompletion}) => {
 
     // added the "||"" to prevent undefined error....because initial state doesnt match input value?
   const [isEditing, setIsEditing] = useState(false);
@@ -184,6 +184,15 @@ export const EditForm = ({task,fetchAllTasks}) => {
           >
             Delete
           </Button>
+          
+            <input
+              type="checkbox"
+              label="Mark task as complete"
+              checked={task.completed}
+              onChange={() => handleTaskCompletion(task.id)} />
+            
+      
+
         </>
       )}
     </Form>

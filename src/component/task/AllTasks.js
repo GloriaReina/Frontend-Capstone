@@ -86,6 +86,8 @@ export const AllTasks = () => {
     return true;
   });
 
+  const sortedFilteredTasks = [...filteredTasks].sort((a, b) => a.urgencyLevel - b.urgencyLevel);
+
   const handleTaskCompletion = (taskId) => {
     const updatedTasks = tasks.map((task) => {
       if (task.id === taskId) {
@@ -153,23 +155,20 @@ export const AllTasks = () => {
         </Dropdown.Item>
       </Dropdown.Menu>
       <ul>
-        {filteredTasks.map((task) => (
+        {sortedFilteredTasks.map((task) => (
           <>
           {/* sent task and fetchAllTasks as props to EditForm */}
+          <div className={`task-item urgency-${task.urgencyLevel}`}>      
+          <li key={task.id}>{`${task.description} by ${task.deadline}`}</li>
+          </div>
           <EditForm
                   task={task}
                   fetchAllTasks={fetchAllTasks}
                   updateTaskDisplayed={updateTaskDisplayed}
+                  handleTaskCompletion={handleTaskCompletion}
                 />
-          <li key={task.id}>{`${task.description} by ${task.deadline}`}</li>
-          <li> 
-            <input
-              type="checkbox"
-              label="Mark task as complete"
-              checked={task.completed}
-              onChange={() => handleTaskCompletion(task.id)} />
-            
-      </li>
+         
+          
       </>
       
         ))}
