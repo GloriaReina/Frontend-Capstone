@@ -73,7 +73,7 @@ const tasksPastWeek = filterTaskArrayData.filter(task => {
           label: "Actual Time",
           data: tasksPastWeek.map((task) => task.actualTime),
           fill: false,
-          borderColor: "#00f"
+          borderColor: "#83E077"
         }
       ]
     };

@@ -9,12 +9,17 @@ export const AllTasks = () => {
   const [filter, setFilter] = useState('all');
 
 
+  const localAppUser = localStorage.getItem("app_user")
+    const AppUserObject = JSON.parse(localAppUser)
+
   /* Fetched all tasks in data base and assigned data to state variable "tasks"*/
   const fetchAllTasks = () => {
     fetch(`http://localhost:8088/tasks`)
       .then((response) => response.json())
       .then((tasksArray) => {
-        setTasks(tasksArray);
+        /*filter tasks in database by user's id so that only their tasks displays*/
+        const tasksById = tasksArray.filter(task=>{ return task.userId=== AppUserObject.id})
+        setTasks(tasksById);
       });
   };
 
