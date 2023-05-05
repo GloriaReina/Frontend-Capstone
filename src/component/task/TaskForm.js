@@ -225,7 +225,6 @@ export const TaskForm = ({ fetchAllTasks}) => {
               type="text"
               placeholder="Length of time used (min) "
               value={task.actualTime}
-              required
               onChange={(evt) => {
                 const copy = { ...task };
                 copy.actualTime = evt.target.value;
