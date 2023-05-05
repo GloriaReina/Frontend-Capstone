@@ -1,6 +1,6 @@
 import { useState, useEffect} from "react";
-import { TaskForm } from "./task/TaskForm";
-import { TodayTasks } from "./task/TodayTasks";
+import { TaskForm } from "../task/TaskForm";
+import { TodayTasks } from "../task/TodayTasks";
 
 
 export const HomePage = ()=>{
