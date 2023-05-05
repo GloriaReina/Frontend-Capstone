@@ -2,10 +2,6 @@ import { useState } from "react";
 import {Button,Form,Container,Row,Col,CloseButton} from "react-bootstrap";
 import { EditForm } from "./EditForm";
 
-
-
-
-
 export const TaskForm = ({ fetchAllTasks}) => {
 
   const [isEditFormVisible, setIsEditFormVisible] = useState(false);
@@ -46,8 +42,7 @@ export const TaskForm = ({ fetchAllTasks}) => {
       task.category &&
       task.description &&
       task.deadline &&
-      task.estimatedTime &&
-      task.actualTime
+      task.estimatedTime 
     ) {
       setIsFormValid(true);
     } else {

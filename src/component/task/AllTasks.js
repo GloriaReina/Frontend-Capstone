@@ -93,6 +93,11 @@ export const AllTasks = () => {
 
   const sortedFilteredTasks = [...filteredTasks].sort((a, b) => a.urgencyLevel - b.urgencyLevel);
 
+
+  /*value of taskId(can have any name) comes from  task.id property of the task object thats selected when user click its checkbox
+
+  The handleTaskCompletion function receives the taskId parameter,creates a new array of updatedTasks using the map function. updatedTask array has all the original tasks, but with the completed status of the task with the matching taskId set to true */
+
   const handleTaskCompletion = (taskId) => {
     const updatedTasks = tasks.map((task) => {
       if (task.id === taskId) {
@@ -103,7 +108,11 @@ export const AllTasks = () => {
 
     setTasks(updatedTasks);
 
+    /*find the updated task with the matching taskId using the find method. */
     const updatedTask = updatedTasks.find((task) => task.id === taskId);
+
+    /*Then sends a PUT request to update the status of that task on the server using the fetch function.*/
+    
     fetch(`http://localhost:8088/tasks/${taskId}`, {
       method: "PUT",
       headers: {
@@ -168,9 +177,7 @@ export const AllTasks = () => {
           </div>
           <EditForm
                   task={task}
-                  setTasks= {setTasks}
                   fetchAllTasks={fetchAllTasks}
-                  updateTaskDisplayed={updateTaskDisplayed}
                   handleTaskCompletion={handleTaskCompletion}
                 />
          
