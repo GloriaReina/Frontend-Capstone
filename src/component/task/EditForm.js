@@ -4,7 +4,7 @@ import { Button, Form, CloseButton, Col,Row } from "react-bootstrap";
 // task/taskSubmitted prop received from Homepage
 export const EditForm = ({task,fetchAllTasks, handleTaskCompletion}) => {
 
-    // added the "||"" to prevent undefined error....because initial state doesnt match input value?
+    
   const [isEditing, setIsEditing] = useState(false);
   const [editDescription, setEditDescription] = useState(task.description);
   const [editUrgency, setEditUrgency] = useState(task.urgencyLevel);
@@ -52,8 +52,12 @@ export const EditForm = ({task,fetchAllTasks, handleTaskCompletion}) => {
   const handleSaveClick = (event) => {
     event.preventDefault();
 
+  const localAppUser = localStorage.getItem("app_user");
+  const appUserObject = JSON.parse(localAppUser);
+
     const editedTaskData = {
-      description: editDescription || "",
+      userId: appUserObject.id,
+      description: editDescription,
       deadline: editDeadline,
       category:editCategory,
       urgencyLevel:editUrgency,
@@ -150,7 +154,7 @@ export const EditForm = ({task,fetchAllTasks, handleTaskCompletion}) => {
               required
               value={task.estimatedTime}
               onChange={(event) => setEditEstimatedTime(event.target.value)}
-              placeholder="Length of time needed (min) "/>
+              />
             </Form.Group>
             <Form.Group className="task-form-group">
             <Form.Label className="task-form-label">Completion Time:</Form.Label>
@@ -159,7 +163,7 @@ export const EditForm = ({task,fetchAllTasks, handleTaskCompletion}) => {
               required
               value={task.actualTime}
               onChange={(event) => setEditActualTime(event.target.value)}
-              placeholder="Length of time needed (min) "/>
+             />
               </Form.Group>
           <Button
             variant="success"

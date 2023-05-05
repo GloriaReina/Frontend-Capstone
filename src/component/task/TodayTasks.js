@@ -28,7 +28,8 @@ the getDate method returns the day of the month based on the local time zone of 
     });
   };
 
-  const filteredTasks = filterTasksByDate();
+  let filteredTasks = filterTasksByDate();
+  filteredTasks = filteredTasks.filter(task=>{ return task.completed===false})
 
   /*  new array (sortedFilteredTasks) takes a copy of the (filteredTask array) which holds tasks due on current day and sorts these tasks by urgency level.
   

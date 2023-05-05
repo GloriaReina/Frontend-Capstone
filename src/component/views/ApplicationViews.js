@@ -1,8 +1,9 @@
 import { Outlet, Route, Routes } from "react-router-dom";
 import { AllTasks } from "../task/AllTasks";
-import { HomePage } from "../HomePage";
+// import { HomePage } from "../HomePage";
 import VisualLineGraph from "../datavisual/VisualLineGraph";
 import VisualPieChart from "../datavisual/VisualPieChart";
+import { HomePage } from "../task/HomePage";
 
 
 
@@ -13,7 +14,7 @@ export const ApplicationViews = () => {
     <Routes>
       <Route path="/" element={
         <>
-        <HomePage />
+        <HomePage/>
         <Outlet />
         
         </>

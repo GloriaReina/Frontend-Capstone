@@ -168,6 +168,7 @@ export const AllTasks = () => {
           </div>
           <EditForm
                   task={task}
+                  setTasks= {setTasks}
                   fetchAllTasks={fetchAllTasks}
                   updateTaskDisplayed={updateTaskDisplayed}
                   handleTaskCompletion={handleTaskCompletion}
