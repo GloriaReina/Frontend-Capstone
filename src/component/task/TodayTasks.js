@@ -46,11 +46,11 @@ export const TodayTasks = ({ tasks, fetchAllTasks, setTasks }) => {
     const currentESTDate = new Date(
       currentDate.toLocaleString("en-US", options)
     );
-
+console.log(currentESTDate)
     return tasks.filter((task) => {
       const dueDate = new Date(task.deadline);
       const dueESTDate = new Date(dueDate.toLocaleString("en-US", options));//"en-US"=language specific format, timeZone option= supports IANA/Olson time zones, such as America/New_York or Europe/London & allows you to work with timezones other than UTC or your own local time zone
-
+      console.log(dueESTDate)
       return (
         dueESTDate.getDate() === currentESTDate.getDate() &&
         dueESTDate.getMonth() === currentESTDate.getMonth() &&
