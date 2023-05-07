@@ -12,6 +12,8 @@ export const EditForm = ({task,fetchAllTasks, handleTaskCompletion}) => {
   const [editDeadline, setEditDeadline] = useState(task.deadline);
   const [editEstimatedTime, setEditEstimatedTime] = useState(task.estimatedTime);
   const [editActualTime, setEditActualTime] = useState(task.actualTime);
+  const [editStartTime, setEditStartTime] = useState(task.startTime);
+  const [editEndTime, setEditEndTime] = useState(task.endTime);
   const [editCompleted, setEditCompleted] = useState(task.completed);
 
   // this will be executed whenever the task object changes
@@ -23,6 +25,8 @@ export const EditForm = ({task,fetchAllTasks, handleTaskCompletion}) => {
     setEditActualTime(task.actualTime);
     setEditCompleted(task.completed);
     setEditDeadline(task.deadline);
+    setEditStartTime(task.startTime)
+    setEditEndTime(task.endTime)
   }, [task]);
 
 //   displays edit form
@@ -63,6 +67,8 @@ export const EditForm = ({task,fetchAllTasks, handleTaskCompletion}) => {
       urgencyLevel:editUrgency,
       estimatedTime:editEstimatedTime,
       actualTime:editActualTime,
+      startTime:editStartTime,
+      endTime:editEndTime,
       completed:editCompleted
     };
 
@@ -155,6 +161,24 @@ export const EditForm = ({task,fetchAllTasks, handleTaskCompletion}) => {
               value={task.estimatedTime}
               onChange={(event) => setEditEstimatedTime(event.target.value)}
               />
+            </Form.Group>
+            <Form.Group className="task-form-group">
+            <Form.Label className="task-form-label">Start Time:</Form.Label>
+            <Form.Control
+              type="time"
+              required
+              value={task.startTime}
+              onChange={(event) => setEditStartTime(event.target.value)}
+            />
+            </Form.Group>
+            <Form.Group className="task-form-group">
+            <Form.Label className="task-form-label">Start Time:</Form.Label>
+            <Form.Control
+              type="time"
+              required
+              value={task.endTime}
+              onChange={(event) => setEditEndTime(event.target.value)}
+            />
             </Form.Group>
             <Form.Group className="task-form-group">
             <Form.Label className="task-form-label">Completion Time:</Form.Label>

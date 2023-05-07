@@ -1,19 +1,48 @@
-const filterTasksByDate = () => {
-  const currentDate = new Date();
-  return tasks.filter((task) => {
-    const dueDate = new Date( task.deadline);
-     
-    return (
-/* add UTC(Coordinated Universal Time) in order to have consistent time zone = avoid issues with daylight saving time changes.
 
-the getDate method returns the day of the month based on the local time zone of the computer= the tasks for the current day were not  displaying because the current day dates in my database where being converted to be a day behind
-*/
-      dueDate.getUTCDate() === currentDate.getUTCDate() &&
-      dueDate.getUTCMonth() === currentDate.getUTCMonth() &&
-      dueDate.getUTCFullYear() === currentDate.getUTCFullYear()
-    );
-  });
-};
+//Code version: Filtered task date by "EST", Problem is what i get is 1day & ~4hrs behind my computer even though im in EST
+
+/* At first was converting to UTC,but my computer is in EST & had to modify the code to account for the 4-hour time difference between EST and UTC so tasks due on the current day didnt disappear at 8pm.*/
+
+  /*used toLocaleString() method to convert the current date and the task deadline to EST time before comparing them so format/time is the same and there's no discrepancies*/
+
+//   const filterTasksByDate = () => {
+//     const currentDate = new Date();
+//     const options = { timeZone: "America/New_York" }; // set timezone to EST
+//     const currentESTDate = new Date(
+//       currentDate.toLocaleString("en-US", options)
+//     );
+// console.log(currentESTDate)
+//     return tasks.filter((task) => {
+//       const dueDate = new Date(task.deadline);
+//       const dueESTDate = new Date(dueDate.toLocaleString("en-US", options));//"en-US"=language specific format, timeZone option= supports IANA/Olson time zones, such as America/New_York or Europe/London & allows you to work with timezones other than UTC or your own local time zone
+//       console.log(dueESTDate)
+//       return (
+//         dueESTDate.getDate() === currentESTDate.getDate() &&
+//         dueESTDate.getMonth() === currentESTDate.getMonth() &&
+//         dueESTDate.getFullYear() === currentESTDate.getFullYear()
+//       );
+//     });
+//   };
+
+
+//Code version: Filtered task date by "UTC" to have cosistent time zones btw entered tasks and current date comparison
+
+// const filterTasksByDate = () => {
+//   const currentDate = new Date();
+//   return tasks.filter((task) => {
+//     const dueDate = new Date( task.deadline);
+     
+//     return (
+// /* add UTC(Coordinated Universal Time) in order to have consistent time zone = avoid issues with daylight saving time changes.
+
+// the getDate method returns the day of the month based on the local time zone of the computer= the tasks for the current day were not  displaying because the current day dates in my database where being converted to be a day behind
+// */
+//       dueDate.getUTCDate() === currentDate.getUTCDate() &&
+//       dueDate.getUTCMonth() === currentDate.getUTCMonth() &&
+//       dueDate.getUTCFullYear() === currentDate.getUTCFullYear()
+//     );
+//   });
+// };
 
 
 

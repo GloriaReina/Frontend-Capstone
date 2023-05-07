@@ -18,6 +18,8 @@ export const TaskForm = ({ fetchAllTasks}) => {
     deadline: "",
     estimatedTime: "",
     actualTime: "",
+    startTime: "",
+    endTime: "",
     completed: false,
   });
 
@@ -42,7 +44,9 @@ export const TaskForm = ({ fetchAllTasks}) => {
       task.category &&
       task.description &&
       task.deadline &&
-      task.estimatedTime 
+      task.estimatedTime,
+      task.startTime &&
+      task.endTime 
     ) {
       setIsFormValid(true);
     } else {
@@ -64,6 +68,8 @@ export const TaskForm = ({ fetchAllTasks}) => {
       deadline: task.deadline,
       estimatedTime: task.estimatedTime,
       actualTime: task.actualTime,
+      starTime: task.startTime,
+      endTime: task.endTime,
       completed: false,
     };
 
@@ -90,6 +96,8 @@ export const TaskForm = ({ fetchAllTasks}) => {
           deadline: "",
           estimatedTime: "",
           actualTime: "",
+          startTime: "",
+          endTime: "",
           completed: false,
         });
       })
@@ -227,6 +235,31 @@ export const TaskForm = ({ fetchAllTasks}) => {
               }}
             />
           </Form.Group>
+          <Form.Group className="task-form-group">
+  <Form.Label className="task-form-label">Start Time:</Form.Label>
+  <Form.Control
+    type="time"
+    value={task.startTime}
+    onChange={(evt) => {
+      const copy = { ...task };
+      copy.startTime = evt.target.value;
+      update(copy);
+    }}
+  />
+</Form.Group>
+<Form.Group className="task-form-group">
+  <Form.Label className="task-form-label">End Time:</Form.Label>
+  <Form.Control
+    type="time"
+    value={task.endTime}
+    onChange={(evt) => {
+      const copy = { ...task };
+      copy.endTime = evt.target.value;
+      update(copy);
+    }}
+  />
+</Form.Group>
+
   
           <Button
             type="submit"
