@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Dropdown, Form } from 'react-bootstrap';
-// import { TaskForm } from './TaskForm';
-// import { TodayTasks } from './TodayTasks';
 import { EditForm } from './EditForm';
+import { BigCalendar } from './BigCalendar';
+
 
 export const AllTasks = () => {
   const [tasks, setTasks] = useState([]);
@@ -127,6 +127,7 @@ export const AllTasks = () => {
 
  return (
   <>
+  < BigCalendar/>
   {/* need to wrap it in div so that task form does not display on Task page since you are calling it in order to pass it taskSubmitted
   
   If have extra time...just create a parent component later to hold state*/}
