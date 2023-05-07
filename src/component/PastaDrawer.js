@@ -1,9 +1,158 @@
+return (
+  <div class="register-page">
+  <div id= "register"className="auth-form-container">
+    <Container>
+      <Row>
+        <Col xs={10} sm={6} lg={4} md={8} className="register-container mx-auto">
+          <Form className="register-form"onSubmit={handleRegister}>
+            <h1 className="register-heading">Register</h1>
+            <Form.Group className="mb-3" controlId="formBasicName">
+              <Form.Label>Full Name</Form.Label>
+              <Form.Control
+                type="text"  
+                placeholder="Enter your name" 
+                onChange={updateUser}
+                required
+                autoFocus
+              />
+            </Form.Group>
+
+            <Form.Group className="mb-3" controlId="formBasicEmail">
+                <Form.Label>Email address</Form.Label>
+                <Form.Control
+                  type="email"
+                  placeholder="Email address"
+                  onChange={updateUser}
+                  required
+                  autoFocus
+                />
+                <Form.Text className="text-muted">
+                  We'll never share your email with anyone else.
+                </Form.Text>
+              </Form.Group>
+
+            <Button 
+            variant="primary" 
+            type="submit" 
+            className="sign-in-button">
+              Register
+            </Button>
+
+            <Form.Group>
+            <Link to="/login" className="registration-link sansSerif">
+            Already a member?
+          </Link>
+            </Form.Group>
+          </Form>
+        </Col>
+      </Row>
+    </Container>
+  </div>
+  </div>
+);
+
+/* original register jsx-no bootstrap*/
+return (
+  <div className="auth-form-container">
+  <Container>
+      <Row>
+      <Col xs={10} sm={6} lg={4} md={6} className="login-container mx-auto">
+          <form  className="register-form"onSubmit={handleRegister}>
+              <h2 className="mb-3 font-weight-normal register-title">Register </h2>
+              <fieldset>
+                  <label htmlFor="fullName" className="sansSerif"> Full Name </label>
+                  <input onChange={updateUser}
+                      type="text" id="fullName" className="form-control"
+                      placeholder="Enter your name" required autoFocus />
+              </fieldset>
+              <fieldset>
+                  <label htmlFor="email" className="sansSerif"> Email address </label>
+                  <input onChange={updateUser}
+                      type="email" id="email" className="form-control"
+                      placeholder="Email address" required />
+              </fieldset>
+              <fieldset>
+                  <button type="submit" className="sign-in-button"> Register </button>
+              </fieldset>
+          </form>
+          <section className="link--login">
+          <Link to="/login" className="registration-link sansSerif">
+            Already a member?
+          </Link>
+        </section>
+  </Col>
+  </Row>
+  </Container>
+  </div>
+)
+
+
+/* original task list all task-no bootstrap*/
+
+/* <div className={`task-item urgency-${task.urgencyLevel}`}> 
+               <li
+                  key={task.id}
+                >{`${task.description} by ${task.deadline}`}
+                </li>
+              </div> */
+
+
+
+/*first version login form; no boothstrap*/
+// return (
+//   <div className="auth-form-container">
+//     <Container>
+//       <Row>
+//         <Col xs={10} sm={6} lg={4} md={8} className="login-container mx-auto">
+//           <form className="login-form" onSubmit={handleLogin}>
+//             <h1 className="login-heading">Login </h1>
+//             <fieldset>
+//               <label htmlFor="inputEmail" className="sansSerif">
+//                 Email address
+//               </label>
+//               <input
+//                 type="email"
+//                 value={email}
+//                 onChange={(evt) => set(evt.target.value)}
+//                 className="form-control"
+//                 placeholder="Email address"
+//                 required
+//                 autoFocus
+//               />
+//             </fieldset>
+//             <fieldset>
+//               <label htmlFor="inputPassword">Password:</label>
+//               <input
+//                 type="password"
+//                 value={pass}
+//                 onChange={(evt) => setPass(evt.target.value)}
+//                 placeholder="********"
+//                 required
+//                 autoFocus
+//               />
+//             </fieldset>
+//             <fieldset>
+//               <button type="submit" className="sign-in-button">
+//                 Sign in
+//               </button>
+//             </fieldset>
+//           </form>
+//           <section>
+//             <Link to="/register" className="registration-link sansSerif">
+//               Not a member yet?
+//             </Link>
+//           </section>
+//         </Col>
+//       </Row>
+//     </Container>
+//   </div>
+// );
 
 //Code version: Filtered task date by "EST", Problem is what i get is 1day & ~4hrs behind my computer even though im in EST
 
 /* At first was converting to UTC,but my computer is in EST & had to modify the code to account for the 4-hour time difference between EST and UTC so tasks due on the current day didnt disappear at 8pm.*/
 
-  /*used toLocaleString() method to convert the current date and the task deadline to EST time before comparing them so format/time is the same and there's no discrepancies*/
+/*used toLocaleString() method to convert the current date and the task deadline to EST time before comparing them so format/time is the same and there's no discrepancies*/
 
 //   const filterTasksByDate = () => {
 //     const currentDate = new Date();
@@ -24,14 +173,13 @@
 //     });
 //   };
 
-
 //Code version: Filtered task date by "UTC" to have cosistent time zones btw entered tasks and current date comparison
 
 // const filterTasksByDate = () => {
 //   const currentDate = new Date();
 //   return tasks.filter((task) => {
 //     const dueDate = new Date( task.deadline);
-     
+
 //     return (
 // /* add UTC(Coordinated Universal Time) in order to have consistent time zone = avoid issues with daylight saving time changes.
 
@@ -44,9 +192,6 @@
 //   });
 // };
 
-
-
-
 /* Was getting a undefined error for description in EditForm when i clicked on New task button to display the form....the reason was that both editform and TaskForm where sharing state & the:
 toggleAddTaskForm = () => {setIsFormVisible(!isFormVisible)};
   
@@ -54,10 +199,7 @@ meaning when i clicked on new task button--it would set boolean to true, then bo
 
 solution:
 Needed to give EditForm its own state & toggleEditForm function to display the edit form
-    */ 
-
-
-
+    */
 
 //original App.js
 
@@ -96,7 +238,6 @@ function App() {
 
 export default App; */
 
-
 //Original code for nav bar
 /*  return (
         <Navbar className='navbar' expand="lg" bg="navbar-background" variant="dark" >
@@ -121,13 +262,6 @@ export default App; */
             </Navbar.Collapse>
         </Navbar>
     )*/
-
-
-
-
-
-
-
 
 // orifinal AllTasks displaying incomplete tasks
 

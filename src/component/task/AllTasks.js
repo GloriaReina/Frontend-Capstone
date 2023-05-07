@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Dropdown, Form } from "react-bootstrap";
+import { Dropdown,Container,Col,Row } from "react-bootstrap";
 import { EditForm } from "./EditForm";
 import { BigCalendar } from "./BigCalendar";
 
@@ -89,6 +89,10 @@ export const AllTasks = () => {
     (a, b) => a.urgencyLevel - b.urgencyLevel
   );
 
+  const sortedFilteredTasksDate = [...filteredTasks].sort(
+    (a, b) => a.deadline - b.deadline
+  );
+
   /*value of taskId(can have any name) comes from  task.id property of the task object thats selected when user click its checkbox
 
   The handleTaskCompletion function receives the taskId parameter,creates a new array of updatedTasks using the map function. updatedTask array has all the original tasks, but with the completed status of the task with the matching taskId set to true */
@@ -135,7 +139,7 @@ export const AllTasks = () => {
         </Dropdown.Toggle>
         <Dropdown.Menu>
           <Dropdown.Item onClick={() => setFilter("incomplete tasks")}>
-            My Tasks
+            Incomplete tasks
           </Dropdown.Item>
           <Dropdown.Item onClick={() => setFilter("complete tasks")}>
             Completed tasks
@@ -166,11 +170,11 @@ export const AllTasks = () => {
           {sortedFilteredTasks.map((task) => (
             <>
               {/* sent task and fetchAllTasks as props to EditForm */}
-              <div className={`task-item urgency-${task.urgencyLevel}`}>
-                <li
-                  key={task.id}
-                >{`${task.description} by ${task.deadline}`}</li>
-              </div>
+              <Container className={`task-item urgency-${task.urgencyLevel}`}>  
+              <Row >
+              <Col key={task.id}>{`${task.description} by ${task.deadline}`}</Col>
+              </Row>
+              </Container> 
               <EditForm
                 task={task}
                 fetchAllTasks={fetchAllTasks}

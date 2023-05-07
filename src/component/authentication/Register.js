@@ -1,7 +1,8 @@
 import { useState } from "react"
 import { useNavigate, Link } from "react-router-dom"
-import { Row, Container, Col } from "react-bootstrap"
-import "./Login.css"
+import { Form,Container, Row, Col, Button } from "react-bootstrap";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "./Register.css"
 
 export const Register = (props) => {
     const [user, setUser] = useState({
@@ -53,38 +54,55 @@ export const Register = (props) => {
     }
 
     return (
-        <div className="login-page">
-        <div className="centered-container">
-        <Container>
+        <div class="register-page">
+        <div id= "register"className="auth-form-container">
+          <Container>
             <Row>
-            <Col xs={10} sm={6} lg={4} md={6} className="login-container mx-auto">
-                <form onSubmit={handleRegister}>
-                    <h2 className="mb-3 font-weight-normal register-title">Please Register for Life Hack</h2>
-                    <fieldset>
-                        <label htmlFor="fullName" className="sansSerif"> Full Name </label>
-                        <input onChange={updateUser}
-                            type="text" id="fullName" className="form-control"
-                            placeholder="Enter your name" required autoFocus />
-                    </fieldset>
-                    <fieldset>
-                        <label htmlFor="email" className="sansSerif"> Email address </label>
-                        <input onChange={updateUser}
-                            type="email" id="email" className="form-control"
-                            placeholder="Email address" required />
-                    </fieldset>
-                    <fieldset>
-                        <button type="submit" className="sign-in-button"> Register </button>
-                    </fieldset>
-                </form>
-                <section className="link--login">
-                <Link to="/login" className="login-link sansSerif">
+              <Col xs={10} sm={6} lg={4} md={8} className="register-container mx-auto">
+                <Form className="register-form"onSubmit={handleRegister}>
+                  <h1 className="register-heading">Register</h1>
+                  <Form.Group className="mb-3" controlId="formBasicName">
+                    <Form.Label>Full Name</Form.Label>
+                    <Form.Control
+                      type="text"  
+                      placeholder="Enter your name" 
+                      onChange={updateUser}
+                      required
+                      autoFocus
+                    />
+                  </Form.Group>
+      
+                  <Form.Group className="mb-3" controlId="formBasicEmail">
+                      <Form.Label>Email address</Form.Label>
+                      <Form.Control
+                        type="email"
+                        placeholder="Email address"
+                        onChange={updateUser}
+                        required
+                        autoFocus
+                      />
+                      <Form.Text className="text-muted">
+                        We'll never share your email with anyone else.
+                      </Form.Text>
+                    </Form.Group>
+      
+                  <Button 
+                  variant="primary" 
+                  type="submit" 
+                  className="sign-in-button">
+                    Register
+                  </Button>
+      
+                  <Form.Group>
+                  <Link to="/login" className="registration-link sansSerif">
                   Already a member?
                 </Link>
-              </section>
-        </Col>
-        </Row>
-        </Container>
+                  </Form.Group>
+                </Form>
+              </Col>
+            </Row>
+          </Container>
         </div>
         </div>
-    )
+      );
 }
