@@ -1,4 +1,5 @@
 import { EditForm } from "./EditForm";
+import { Container,Col,Row } from "react-bootstrap";
 import "./TodayTasks.css";
 
 export const TodayTasks = ({ tasks, fetchAllTasks, setTasks }) => {
@@ -69,24 +70,33 @@ export const TodayTasks = ({ tasks, fetchAllTasks, setTasks }) => {
 
   return (
     <>
+    <h1>Tasks due today</h1>
       <div>
-        <h1>Tasks due today:</h1>
-        <ul>
+        
           {sortedFilteredTasks.map((task) => (
             <>
-              {/* add a CSS class based on urgency level of each task--use to color-code tasks based off */}
-              <div className={`task-item urgency-${task.urgencyLevel}`}>
-                <li key={task.id}>{task.description} </li>
-              </div>
+            <div className="today-task-container">
+            <Container >  
+              <Row className={`urgency-${task.urgencyLevel}`}>
+              <Col key={task.id}>{`${task.description} `}
+              
+              </Col>
+              <Col>
               <EditForm
                 task={task}
                 fetchAllTasks={fetchAllTasks}
                 handleTaskCompletion={handleTaskCompletion}
                 //  //pass fetchALLTasks prop EditForm component so that it can use it after the PUT request to update page with current state; and task so it can have access to task object for edits
               />
+              </Col>
+              </Row>
+              </Container> 
+              </div>
+              
+              
             </>
           ))}
-        </ul>
+        
       </div>
     </>
   );

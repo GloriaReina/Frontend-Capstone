@@ -89,9 +89,9 @@ export const AllTasks = () => {
     (a, b) => a.urgencyLevel - b.urgencyLevel
   );
 
-  const sortedFilteredTasksDate = [...filteredTasks].sort(
-    (a, b) => a.deadline - b.deadline
-  );
+  // const sortedFilteredTasksDate = [...filteredTasks].sort(
+  //   (a, b) => a.deadline - b.deadline
+  // );
 
   /*value of taskId(can have any name) comes from  task.id property of the task object thats selected when user click its checkbox
 
@@ -127,11 +127,6 @@ export const AllTasks = () => {
   return (
     <>
       <BigCalendar />
-      {/* need to wrap it in div so that task form does not display on Task page since you are calling it in order to pass it taskSubmitted
-  
-  If have extra time...just create a parent component later to hold state*/}
-      {/* <div style={{ display: "none" }}><TaskForm taskSubmitted={taskSubmitted} /></div>
-<div style={{ display: "none" }}><TodayTasks tasks={tasks} /></div> */}
 
       <Dropdown>
         <Dropdown.Toggle variant="primary" id="dropdown-basic">
@@ -166,23 +161,24 @@ export const AllTasks = () => {
             Work-Life Tasks
           </Dropdown.Item>
         </Dropdown.Menu>
-        <ul>
+
+        <Container className="task-container" > 
           {sortedFilteredTasks.map((task) => (
-            <>
-              {/* sent task and fetchAllTasks as props to EditForm */}
-              <Container className={`task-item urgency-${task.urgencyLevel}`}>  
-              <Row >
-              <Col key={task.id}>{`${task.description} by ${task.deadline}`}</Col>
-              </Row>
-              </Container> 
-              <EditForm
+            <> 
+              <Row className={`urgency-${task.urgencyLevel}`}>
+              <Col key={task.id}>{`${task.description} by ${task.deadline}`}
+               {/* sent task and fetchAllTasks as props to EditForm */}
+               <EditForm
                 task={task}
                 fetchAllTasks={fetchAllTasks}
                 handleTaskCompletion={handleTaskCompletion}
               />
-            </>
-          ))}
-        </ul>
+              </Col>
+              </Row>
+              </>
+              ))}
+              </Container> 
+              
       </Dropdown>
     </>
   );

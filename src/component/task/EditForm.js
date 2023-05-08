@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Button, Form, CloseButton, Col,Row } from "react-bootstrap";
+import { Container, Button, Form, CloseButton, Col,Row } from "react-bootstrap";
 
 // task/taskSubmitted prop received from Homepage
 export const EditForm = ({task,fetchAllTasks, handleTaskCompletion}) => {
@@ -199,28 +199,26 @@ export const EditForm = ({task,fetchAllTasks, handleTaskCompletion}) => {
         </>
       ) : (
         <>
-          <Button
-            variant="success"
-            bsPrefix="edit-task-button"
-            onClick={handleEditClick}
-          >
-            Edit
-          </Button>
+         <Button
+variant="success"
+bsPrefix="edit-task-button"
+onClick={handleEditClick}
+>Edit</Button>
 
-          <Button
-            bsPrefix="task-delete-button"
-            variant="success"
-            onClick={() => handleDeleteTask(task.id)}
-          >
-            Delete
-          </Button>
-          
-            <input
-              type="checkbox"
-              label="Mark task as complete"
-              checked={task.completed}
-              onChange={() => handleTaskCompletion(task.id)} />
-            
+<Button
+bsPrefix="task-delete-button"
+variant="success"
+onClick={() => handleDeleteTask(task.id)}
+>Delete </Button>
+
+        {/* <Form.Group className="mb-3" controlId="formBasicCheckbox"> */}
+        {/* <Form.Check  */}
+        <input
+        type="checkbox"
+        label= "Check to complete" 
+        checked={task.completed}
+        onChange={() => handleTaskCompletion(task.id)} />
+      {/* </Form.Group> */}
       
 
         </>

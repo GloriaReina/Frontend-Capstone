@@ -1,90 +1,72 @@
-return (
-  <div class="register-page">
-  <div id= "register"className="auth-form-container">
-    <Container>
-      <Row>
-        <Col xs={10} sm={6} lg={4} md={8} className="register-container mx-auto">
-          <Form className="register-form"onSubmit={handleRegister}>
-            <h1 className="register-heading">Register</h1>
-            <Form.Group className="mb-3" controlId="formBasicName">
-              <Form.Label>Full Name</Form.Label>
-              <Form.Control
-                type="text"  
-                placeholder="Enter your name" 
-                onChange={updateUser}
-                required
-                autoFocus
-              />
-            </Form.Group>
+<Button
+variant="success"
+bsPrefix="edit-task-button"
+onClick={handleEditClick}
+>Edit</Button>
 
-            <Form.Group className="mb-3" controlId="formBasicEmail">
-                <Form.Label>Email address</Form.Label>
-                <Form.Control
-                  type="email"
-                  placeholder="Email address"
-                  onChange={updateUser}
-                  required
-                  autoFocus
-                />
-                <Form.Text className="text-muted">
-                  We'll never share your email with anyone else.
-                </Form.Text>
-              </Form.Group>
+<Button
+bsPrefix="task-delete-button"
+variant="success"
+onClick={() => handleDeleteTask(task.id)}
+>Delete </Button>
 
-            <Button 
-            variant="primary" 
-            type="submit" 
-            className="sign-in-button">
-              Register
-            </Button>
+        <Form.Group className="mb-3" controlId="formBasicCheckbox">
+        <Form.Check 
+        type="checkbox" 
+        label="Mark task as complete"
+        checked={task.completed}
+        onChange={() => handleTaskCompletion(task.id)} />
+      </Form.Group>
 
-            <Form.Group>
-            <Link to="/login" className="registration-link sansSerif">
-            Already a member?
-          </Link>
-            </Form.Group>
-          </Form>
-        </Col>
-      </Row>
-    </Container>
-  </div>
-  </div>
-);
+
+
+
+{/* add a CSS class based on urgency level of each task--use to color-code tasks based off */}
+{/* <div className={`task-item urgency-${task.urgencyLevel}`}>
+<li key={task.id}>{task.description} </li>
+</div> */}
+
+
+
+ {/* need to wrap it in div so that task form does not display on Task page since you are calling it in order to pass it taskSubmitted
+  
+      {/* <div style={{ display: "none" }}><TaskForm taskSubmitted={taskSubmitted} /></div>
+<div style={{ display: "none" }}><TodayTasks tasks={tasks} /></div> */}
 
 /* original register jsx-no bootstrap*/
-return (
-  <div className="auth-form-container">
-  <Container>
-      <Row>
-      <Col xs={10} sm={6} lg={4} md={6} className="login-container mx-auto">
-          <form  className="register-form"onSubmit={handleRegister}>
-              <h2 className="mb-3 font-weight-normal register-title">Register </h2>
-              <fieldset>
-                  <label htmlFor="fullName" className="sansSerif"> Full Name </label>
-                  <input onChange={updateUser}
-                      type="text" id="fullName" className="form-control"
-                      placeholder="Enter your name" required autoFocus />
-              </fieldset>
-              <fieldset>
-                  <label htmlFor="email" className="sansSerif"> Email address </label>
-                  <input onChange={updateUser}
-                      type="email" id="email" className="form-control"
-                      placeholder="Email address" required />
-              </fieldset>
-              <fieldset>
-                  <button type="submit" className="sign-in-button"> Register </button>
-              </fieldset>
-          </form>
-          <section className="link--login">
-          <Link to="/login" className="registration-link sansSerif">
-            Already a member?
-          </Link>
-        </section>
-  </Col>
-  </Row>
-  </Container>
-  </div>
-)
+// return (
+//   <div className="auth-form-container">
+//   <Container>
+//       <Row>
+//       <Col xs={10} sm={6} lg={4} md={6} className="login-container mx-auto">
+//           <form  className="register-form"onSubmit={handleRegister}>
+//               <h2 className="mb-3 font-weight-normal register-title">Register </h2>
+//               <fieldset>
+//                   <label htmlFor="fullName" className="sansSerif"> Full Name </label>
+//                   <input onChange={updateUser}
+//                       type="text" id="fullName" className="form-control"
+//                       placeholder="Enter your name" required autoFocus />
+//               </fieldset>
+//               <fieldset>
+//                   <label htmlFor="email" className="sansSerif"> Email address </label>
+//                   <input onChange={updateUser}
+//                       type="email" id="email" className="form-control"
+//                       placeholder="Email address" required />
+//               </fieldset>
+//               <fieldset>
+//                   <button type="submit" className="sign-in-button"> Register </button>
+//               </fieldset>
+//           </form>
+//           <section className="link--login">
+//           <Link to="/login" className="registration-link sansSerif">
+//             Already a member?
+//           </Link>
+//         </section>
+//   </Col>
+//   </Row>
+//   </Container>
+//   </div>
+// )
 
 
 /* original task list all task-no bootstrap*/
