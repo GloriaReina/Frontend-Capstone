@@ -1,22 +1,7 @@
-<Button
-variant="success"
-bsPrefix="edit-task-button"
-onClick={handleEditClick}
->Edit</Button>
+//BigCalendar.js => can use moment.tz() method to create a moment object with a specific time zone?
+const startDateTime = moment.tz(`${task.deadline} ${task.startTime}`, dateFormat, 'America/New_York').toDate();
+const endDateTime = moment.tz(`${task.deadline} ${task.endTime}`, dateFormat, 'America/New_York').toDate();
 
-<Button
-bsPrefix="task-delete-button"
-variant="success"
-onClick={() => handleDeleteTask(task.id)}
->Delete </Button>
-
-        <Form.Group className="mb-3" controlId="formBasicCheckbox">
-        <Form.Check 
-        type="checkbox" 
-        label="Mark task as complete"
-        checked={task.completed}
-        onChange={() => handleTaskCompletion(task.id)} />
-      </Form.Group>
 
 
 

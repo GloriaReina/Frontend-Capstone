@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { Container, Button, Form, CloseButton, Col,Row } from "react-bootstrap";
+import Alert from 'react-bootstrap/Alert';
 
 // task/taskSubmitted prop received from Homepage
-export const EditForm = ({task,fetchAllTasks, handleTaskCompletion}) => {
+export const EditForm = ({task,fetchAllTasks, handleTaskCompletion,showAlert, setShowAlert, selectedTask}) => {
 
     
   const [isEditing, setIsEditing] = useState(false);
@@ -15,6 +16,18 @@ export const EditForm = ({task,fetchAllTasks, handleTaskCompletion}) => {
   const [editStartTime, setEditStartTime] = useState(task.startTime);
   const [editEndTime, setEditEndTime] = useState(task.endTime);
   const [editCompleted, setEditCompleted] = useState(task.completed);
+
+ 
+
+/*Pass the task.id(a number) to the handleTaskCompletion function in AllTasks(calls it taskId) so it can compare if the the task array to find the selected task*/
+  const handleCheckboxChange = (id) => {
+    // if (task.actualTime.trim() === '') {
+    //   setShowAlert(true);
+    // } else {
+      handleTaskCompletion(id);
+    // }
+  };
+ 
 
   // this will be executed whenever the task object changes
   useEffect(() => {
@@ -158,7 +171,7 @@ export const EditForm = ({task,fetchAllTasks, handleTaskCompletion}) => {
             <Form.Control
               type="text"
               required
-              value={task.estimatedTime}
+              value={editEstimatedTime}
               onChange={(event) => setEditEstimatedTime(event.target.value)}
               />
             </Form.Group>
@@ -167,16 +180,16 @@ export const EditForm = ({task,fetchAllTasks, handleTaskCompletion}) => {
             <Form.Control
               type="time"
               required
-              value={task.startTime}
+              value={editStartTime}
               onChange={(event) => setEditStartTime(event.target.value)}
             />
             </Form.Group>
             <Form.Group className="task-form-group">
-            <Form.Label className="task-form-label">Start Time:</Form.Label>
+            <Form.Label className="task-form-label">End Time:</Form.Label>
             <Form.Control
               type="time"
               required
-              value={task.endTime}
+              value={editEndTime}
               onChange={(event) => setEditEndTime(event.target.value)}
             />
             </Form.Group>
@@ -185,7 +198,7 @@ export const EditForm = ({task,fetchAllTasks, handleTaskCompletion}) => {
             <Form.Control
               type="text"
               required
-              value={task.actualTime}
+              value={editActualTime}
               onChange={(event) => setEditActualTime(event.target.value)}
              />
               </Form.Group>
@@ -211,14 +224,22 @@ variant="success"
 onClick={() => handleDeleteTask(task.id)}
 >Delete </Button>
 
-        {/* <Form.Group className="mb-3" controlId="formBasicCheckbox"> */}
-        {/* <Form.Check  */}
+        
         <input
         type="checkbox"
         label= "Check to complete" 
         checked={task.completed}
-        onChange={() => handleTaskCompletion(task.id)} />
-      {/* </Form.Group> */}
+        onChange={() => handleCheckboxChange(task.id)} />
+        
+        {showAlert && selectedTask && (
+        <Alert variant="danger" onClose={() => setShowAlert(false)} dismissible>
+          <Alert.Heading>One less thing on your plate!!
+          </Alert.Heading>
+          <hr />
+          <p>
+          Fill in task completion time before marking task as complete!.</p>
+        </Alert>
+      )}
       
 
         </>

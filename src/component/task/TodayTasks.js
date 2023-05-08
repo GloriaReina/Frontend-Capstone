@@ -1,8 +1,15 @@
+import React, {useState} from "react";
 import { EditForm } from "./EditForm";
 import { Container,Col,Row } from "react-bootstrap";
 import "./TodayTasks.css";
 
+
+//recieved props from homepage
 export const TodayTasks = ({ tasks, fetchAllTasks, setTasks }) => {
+
+  const [showAlert, setShowAlert] = useState(false);
+
+
   /*value of taskId(can have any name) comes from  task.id property of the task object thats selected when user click its checkbox
 
   updatedTask array has all the original tasks, but with the completed status of the task with the matching taskId set to true */
@@ -36,7 +43,7 @@ export const TodayTasks = ({ tasks, fetchAllTasks, setTasks }) => {
 
   /*Function that filters the list of tasks based on the current date & 
     returns a new array that contains only the tasks that are due on the current date.*/
-
+/*new Date() constructor a Date object, without any arguments= current date and time... with a Date object, can use various methods to retrieve or modify its value, such as getDate(), getMonth(), getFullYear(), getTime() .*/
     const filterTasksByDate = () => {
       const currentDate = new Date();
       return tasks.filter((task) => {
@@ -69,10 +76,10 @@ export const TodayTasks = ({ tasks, fetchAllTasks, setTasks }) => {
   );
 
   return (
-    <>
-    <h1>Tasks due today</h1>
-      <div>
-        
+    <React.Fragment >
+    
+      <div className="today-task">
+      <h1>Tasks due today</h1>
           {sortedFilteredTasks.map((task) => (
             <>
             <div className="today-task-container">
@@ -81,11 +88,13 @@ export const TodayTasks = ({ tasks, fetchAllTasks, setTasks }) => {
               <Col key={task.id}>{`${task.description} `}
               
               </Col>
-              <Col>
+              <Col className="button-column">
               <EditForm
                 task={task}
                 fetchAllTasks={fetchAllTasks}
                 handleTaskCompletion={handleTaskCompletion}
+                showAlert={showAlert}
+                setShowAlert={setShowAlert}
                 //  //pass fetchALLTasks prop EditForm component so that it can use it after the PUT request to update page with current state; and task so it can have access to task object for edits
               />
               </Col>
@@ -98,6 +107,6 @@ export const TodayTasks = ({ tasks, fetchAllTasks, setTasks }) => {
           ))}
         
       </div>
-    </>
+    </React.Fragment>
   );
 };

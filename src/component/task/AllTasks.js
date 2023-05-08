@@ -2,10 +2,14 @@ import React, { useState, useEffect } from "react";
 import { Dropdown,Container,Col,Row } from "react-bootstrap";
 import { EditForm } from "./EditForm";
 import { BigCalendar } from "./BigCalendar";
+import Alert from 'react-bootstrap/Alert';
 
 export const AllTasks = () => {
   const [tasks, setTasks] = useState([]);
   const [filter, setFilter] = useState("incomplete tasks");
+  const [showAlert, setShowAlert] = useState(false);
+  const [selectedTask, setSelectedTask]= useState("")
+
 
   const localAppUser = localStorage.getItem("app_user");
   const AppUserObject = JSON.parse(localAppUser);
@@ -97,15 +101,28 @@ export const AllTasks = () => {
 
   The handleTaskCompletion function receives the taskId parameter,creates a new array of updatedTasks using the map function. updatedTask array has all the original tasks, but with the completed status of the task with the matching taskId set to true */
 
+  
   const handleTaskCompletion = (taskId) => {
-    const updatedTasks = tasks.map((task) => {
-      if (task.id === taskId) {
-        return { ...task, completed: true };
-      }
-      return task;
-    });
+    const taskToComplete = tasks.find((task) => task.id === taskId);
+ 
+    console.log("this should be task to complete", taskToComplete)
+    
+    //now have a state var that holds the id of the selected task and can pass this to edit form
+    setSelectedTask(taskToComplete)
+    console.log(selectedTask)
 
-    setTasks(updatedTasks);
+    if (taskToComplete.actualTime.trim() === '') {
+      setShowAlert(true);
+    } else {
+      const updatedTasks = tasks.map((task) => {
+        if (task.id === taskId) {
+          return { ...task, completed: true };
+        }
+        return task;
+      });
+      setTasks(updatedTasks);
+    
+ 
 
     /*find the updated task with the matching taskId using the find method. */
     const updatedTask = updatedTasks.find((task) => task.id === taskId);
@@ -123,6 +140,7 @@ export const AllTasks = () => {
       fetchAllTasks();
     });
   };
+  }
 
   return (
     <>
@@ -172,6 +190,9 @@ export const AllTasks = () => {
                 task={task}
                 fetchAllTasks={fetchAllTasks}
                 handleTaskCompletion={handleTaskCompletion}
+                showAlert={showAlert}
+                setShowAlert={setShowAlert}
+                selectedTask={selectedTask}
               />
               </Col>
               </Row>
