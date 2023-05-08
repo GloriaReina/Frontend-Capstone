@@ -1,7 +1,6 @@
 import Nav from 'react-bootstrap/Nav'
 import Navbar from 'react-bootstrap/Navbar'
 import { useNavigate } from 'react-router-dom'
-import { Link } from 'react-scroll'
 import { NavLink } from 'react-bootstrap'
 import "./NavBar.css"
 

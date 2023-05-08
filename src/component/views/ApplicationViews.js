@@ -1,6 +1,11 @@
 import { Outlet, Route, Routes } from "react-router-dom";
 import { AllTasks } from "../task/AllTasks";
-import { HomePage } from "../HomePage";
+// import { HomePage } from "../HomePage";
+import VisualLineGraph from "../datavisual/VisualLineGraph";
+import VisualPieChart from "../datavisual/VisualPieChart";
+import { HomePage } from "../task/HomePage";
+
+
 
 //render the <TicketList> component with  a <Route> component.
 
@@ -9,7 +14,7 @@ export const ApplicationViews = () => {
     <Routes>
       <Route path="/" element={
         <>
-        <HomePage />
+        <HomePage/>
         <Outlet />
         
         </>
@@ -17,6 +22,12 @@ export const ApplicationViews = () => {
 
       </Route>
       <Route path="tasks" element={<AllTasks />} />
+      <Route path="visuals" element={
+      <>
+      <VisualLineGraph />
+      <VisualPieChart />
+      </>
+      }/>
     </Routes>
   );
 };

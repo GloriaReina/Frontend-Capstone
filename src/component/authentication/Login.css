@@ -1,0 +1,36 @@
+.auth-form-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+  } 
+
+  .login-container{
+    padding: 5rem;
+    border: 1px solid white;
+    border-radius: 10px;
+    margin: 5rem;
+  }
+#login{
+    background-image: linear-gradient(79deg, rgb(197, 216, 220), rgb(109, 216, 109),48%, #ee6b24);
+    position: fixed;
+    min-width: 100%;
+    min-height: 100%;
+    background-size: cover;
+    background-position: center;
+    color: white;
+  }
+
+ .sign-in-button {
+    border: none;
+    background-color: white;
+    padding: 5px;
+    margin: 0.3rem 0;
+    border-radius: 5px;
+    cursor: pointer;
+    color: #ee6b24;
+  }
+
+  .registration-link {
+    color: whitesmoke;
+  }

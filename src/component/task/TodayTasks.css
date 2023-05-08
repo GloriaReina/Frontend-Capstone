@@ -1,0 +1,38 @@
+
+h1{
+  text-align: center;
+}
+
+.urgency-1 {
+    background-color: rgb(109, 246, 91);
+  }
+
+  .urgency-2 {
+    background-color: rgb(58, 244, 210);
+  }
+  
+  .urgency-3 {
+    background-color: rgb(236, 221, 124);
+  }
+  .urgency-4 {
+    background-color: rgb(234, 165, 226);
+  }
+
+  .today-task-container{
+    display: flex;
+    flex-direction: row;
+    /* justify-content: space-between; */
+    /* align-items: flex-start; */
+  }
+
+  /* .today-task {
+    background-color:  #f0ebe9eb;
+    position: fixed;
+    min-width: 100%;
+    min-height: 100%;
+    background-size: cover;
+    background-position: center;
+    
+  } */
+
+ 
