@@ -228,7 +228,9 @@ onClick={() => handleDeleteTask(task.id)}
         checked={task.completed}
         onChange={() => handleCheckboxChange(task.id)} />
         
-        {showAlert && selectedTask && (
+        {/*selectedTask: state var used to determine whether a task has been selected or not, then check if its the same as the task being rendered.*/}
+
+        {selectedTask === task && showModal && (
            setShowModal(true)
       )}
 

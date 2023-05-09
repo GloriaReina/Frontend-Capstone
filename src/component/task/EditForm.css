@@ -16,3 +16,16 @@
   p{
     text-align: center;
   }
+
+
+  /*
+  My code is displaying modals for all tasks causing backfround screen to be black: This is a fix  found on stackoverflow until I can figure out the bug source
+
+  (https://stackoverflow.com/questions/74290406/background-goes-black-when-react-bootstrapv2-5-0-modal-opens) 
+  */
+
+  .modal-backdrop:not(#_) ~ .modal-backdrop,
+  body:not(.modal-open) .modal-backdrop {
+    display: none;
+  }
+  

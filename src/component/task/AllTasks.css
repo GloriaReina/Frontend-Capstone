@@ -3,3 +3,10 @@
     flex-direction: row;
 } */
 
+/*tried to see if i could style calendar in alltasks since its displayed in task page and i cant seem to style it in its own component*/
+.big-calendar{
+    margin-left: 200px;  
+    margin-top: 200px;
+    /* display: flex;
+    flex-direction: row; */
+}

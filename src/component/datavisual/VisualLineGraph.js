@@ -51,7 +51,7 @@ const tasksPastWeek = filterTaskArrayData.filter(task => {
   		
 		const oneWeekAgo = moment().subtract(7, 'days');
 
-	// compare each taskDate to oneWeekAgo using the isAfter() method. If taskDate is after oneWeekAgo, the task is included in the 	 	   filtered array
+	// compare each taskDate to oneWeekAgo using the isAfter() method. If taskDate is after oneWeekAgo, the task is included in the filtered array
 
   		return taskDate.isAfter(oneWeekAgo);
 });

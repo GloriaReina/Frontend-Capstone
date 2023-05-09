@@ -1,24 +1,31 @@
-{showAlert && selectedTask && (
-  <Alert variant="danger" onClose={() => setShowAlert(false)} dismissible>
-    <Alert.Heading>One less thing on your plate!!
-    </Alert.Heading>
-    <hr />
-    <p>
-    Fill in task completion time before marking task as complete!.</p>
-  </Alert>
-)}
 
 
-if (taskToComplete.actualTime.trim() === '') {
-  setShowAlert(true);
-} else {
-  const updatedTasks = tasks.map((task) => {
-    if (task.id === taskId) {
-      return { ...task, completed: true };
-    }
-    return task;
-  });
-  setTasks(updatedTasks);
+/*-------TodayTask.js original conversion to UTC before modifying to subtract 4 hours-------*/
+
+/*Function that filters the list of tasks based on the current date & 
+    returns a new array that contains only the tasks that are due on the current date.*/
+/*new Date() constructor a Date object, without any arguments= current date and time... with a Date object, can use various methods to retrieve or modify its value, such as getDate(), getMonth(), getFullYear(), getTime() .*/
+
+// const filterTasksByDate = () => {
+//   const currentDate = new Date();
+//   return tasks.filter((task) => {
+//     const dueDate = new Date( task.deadline);
+     
+//     return (
+
+/* add UTC(Coordinated Universal Time) in order to have consistent time zone = avoid issues with daylight saving time changes.
+
+the getDate method returns the day of the month based on the local time zone of the computer= the tasks for the current day were not  displaying because the current day dates in my database where being converted to be a day behind
+*/
+//       dueDate.getUTCDate() === currentDate.getUTCDate() &&
+//       dueDate.getUTCMonth() === currentDate.getUTCMonth() &&
+//       dueDate.getUTCFullYear() === currentDate.getUTCFullYear()
+//     );
+//   });
+// };
+
+/*-------end of original conversion to UTC before modifying to subtract 4 hours-------*/
+
 
 
 

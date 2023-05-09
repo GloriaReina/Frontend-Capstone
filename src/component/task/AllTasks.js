@@ -92,15 +92,19 @@ export const AllTasks = () => {
   const handleTaskCompletion = (taskId) => {
     const taskToComplete = tasks.find((task) => task.id === taskId);
  
-    console.log("this should be task to complete", taskToComplete)
+     const taskToCompleteId= taskToComplete.id 
+        console.log(taskToCompleteId)
+        console.log("this should be task to complete", taskToComplete)
     
     //now have a state var that holds the id of the selected task and can pass this to edit form
-    setSelectedTask(taskToComplete)
-    console.log(selectedTask)
+    setSelectedTask(taskToCompleteId)
+    
+    
 
     if (taskToComplete.actualTime.trim() === '') {
-      setShowModal(true);
-    } else {
+      setShowModal(true)
+    } 
+    else{
       const updatedTasks = tasks.map((task) => {
         if (task.id === taskId) {
           return { ...task, completed: true };
@@ -131,7 +135,7 @@ export const AllTasks = () => {
 
   return (
     <>
-      <BigCalendar />
+      <BigCalendar className="big-calendar"/>
 
       <Dropdown>
         <Dropdown.Toggle variant="primary" id="dropdown-basic">
