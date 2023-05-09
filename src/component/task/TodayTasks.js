@@ -8,21 +8,32 @@ import "./TodayTasks.css";
 export const TodayTasks = ({ tasks, fetchAllTasks, setTasks }) => {
 
   const [showAlert, setShowAlert] = useState(false);
+  const [selectedTask, setSelectedTask]= useState("")
+  const [showModal, setShowModal] = useState(false)
 
 
   /*value of taskId(can have any name) comes from  task.id property of the task object thats selected when user click its checkbox
 
   updatedTask array has all the original tasks, but with the completed status of the task with the matching taskId set to true */
   const handleTaskCompletion = (taskId) => {
-    const updatedTasks = tasks.map((task) => {
-      if (task.id === taskId) {
-        return { ...task, completed: true };
-      }
-      return task;
-    });
+    const taskToComplete = tasks.find((task) => task.id === taskId);
+    
+    //now have a state var that holds the id of the selected task and can pass this to edit form
+    setSelectedTask(taskToComplete)
+    console.log(selectedTask)
 
-    //setTask prop from HomePage to update state var to updatedTasks so that on the homepage when user checks checkbox the state variable is updated so that the completed property is set to true and the task is removed from view
-    setTasks(updatedTasks);
+    if (taskToComplete.actualTime.trim() === '') {
+      setShowModal(true);
+    } else {
+      const updatedTasks = tasks.map((task) => {
+        if (task.id === taskId) {
+          return { ...task, completed: true };
+        }
+        return task;
+      });
+      setTasks(updatedTasks);
+    
+ 
 
     /*find the updated task with the matching taskId using the find method. */
     const updatedTask = updatedTasks.find((task) => task.id === taskId);
@@ -40,6 +51,7 @@ export const TodayTasks = ({ tasks, fetchAllTasks, setTasks }) => {
       fetchAllTasks();
     });
   };
+  }
 
   /*Function that filters the list of tasks based on the current date & 
     returns a new array that contains only the tasks that are due on the current date.*/
@@ -94,7 +106,9 @@ export const TodayTasks = ({ tasks, fetchAllTasks, setTasks }) => {
                 fetchAllTasks={fetchAllTasks}
                 handleTaskCompletion={handleTaskCompletion}
                 showAlert={showAlert}
-                setShowAlert={setShowAlert}
+                showModal={showModal}
+                setShowModal={setShowModal}
+                selectedTask={selectedTask}
                 //  //pass fetchALLTasks prop EditForm component so that it can use it after the PUT request to update page with current state; and task so it can have access to task object for edits
               />
               </Col>

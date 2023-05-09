@@ -1,3 +1,27 @@
+{showAlert && selectedTask && (
+  <Alert variant="danger" onClose={() => setShowAlert(false)} dismissible>
+    <Alert.Heading>One less thing on your plate!!
+    </Alert.Heading>
+    <hr />
+    <p>
+    Fill in task completion time before marking task as complete!.</p>
+  </Alert>
+)}
+
+
+if (taskToComplete.actualTime.trim() === '') {
+  setShowAlert(true);
+} else {
+  const updatedTasks = tasks.map((task) => {
+    if (task.id === taskId) {
+      return { ...task, completed: true };
+    }
+    return task;
+  });
+  setTasks(updatedTasks);
+
+
+
 //BigCalendar.js => can use moment.tz() method to create a moment object with a specific time zone?
 const startDateTime = moment.tz(`${task.deadline} ${task.startTime}`, dateFormat, 'America/New_York').toDate();
 const endDateTime = moment.tz(`${task.deadline} ${task.endTime}`, dateFormat, 'America/New_York').toDate();
@@ -315,3 +339,18 @@ export const AllTasks = () => {
   );
 };
 */
+
+
+  // // ---------------->/*PROPS */------------------//
+  /* DID NOT END UP USING: This updateTaskDisplayed Function is passed to the EditForm component where it is called in the handleSaveClick funtion after the PUT request. All the tasks displayed to user to be updated with the edited info = show the task as it now is in state*/
+  // ---------------->/*PROPS */------------------//
+
+  // const updateTaskDisplayed = (editedTask) => {
+  //   setTasks((prevTasks) =>
+  //     prevTasks.map((task) =>
+  //       // if the task id matches the updated task id, return the updated task, otherwise return the task
+  //       task.id === editedTask.id ? editedTask : task
+  //     )
+  //   );
+  // };
+

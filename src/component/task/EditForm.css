@@ -1,0 +1,18 @@
+.firework-img {
+    width: 380px;
+    height: 200px;
+  }
+
+  .image-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-left: 30px;
+    margin-top: 3px;
+    /* opacity: 0.8 */
+    border-radius: 50%
+  }
+
+  p{
+    text-align: center;
+  }

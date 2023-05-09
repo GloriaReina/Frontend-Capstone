@@ -9,7 +9,7 @@ export const AllTasks = () => {
   const [filter, setFilter] = useState("incomplete tasks");
   const [showAlert, setShowAlert] = useState(false);
   const [selectedTask, setSelectedTask]= useState("")
-
+  const [showModal, setShowModal] = useState(false)
 
   const localAppUser = localStorage.getItem("app_user");
   const AppUserObject = JSON.parse(localAppUser);
@@ -30,19 +30,6 @@ export const AllTasks = () => {
   useEffect(() => {
     fetchAllTasks();
   }, []);
-
-  // // ---------------->/*PROPS */------------------//
-  /* This updateTaskDisplayed Function is passed to the EditForm component where it is called in the handleSaveClick funtion after the PUT request. All the tasks displayed to user to be updated with the edited info = show the task as it now is in state*/
-  // ---------------->/*PROPS */------------------//
-
-  const updateTaskDisplayed = (editedTask) => {
-    setTasks((prevTasks) =>
-      prevTasks.map((task) =>
-        // if the task id matches the updated task id, return the updated task, otherwise return the task
-        task.id === editedTask.id ? editedTask : task
-      )
-    );
-  };
 
   /* 
     When user selects an option from the dropdown menu, the onclick event will cause the state variable to be updated to one of the conditional statements below
@@ -112,7 +99,7 @@ export const AllTasks = () => {
     console.log(selectedTask)
 
     if (taskToComplete.actualTime.trim() === '') {
-      setShowAlert(true);
+      setShowModal(true);
     } else {
       const updatedTasks = tasks.map((task) => {
         if (task.id === taskId) {
@@ -191,7 +178,8 @@ export const AllTasks = () => {
                 fetchAllTasks={fetchAllTasks}
                 handleTaskCompletion={handleTaskCompletion}
                 showAlert={showAlert}
-                setShowAlert={setShowAlert}
+                showModal={showModal}
+                setShowModal={setShowModal}
                 selectedTask={selectedTask}
               />
               </Col>
