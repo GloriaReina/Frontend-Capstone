@@ -29,9 +29,16 @@ the getDate method returns the day of the month based on the local time zone of 
 
 
 
-//BigCalendar.js => can use moment.tz() method to create a moment object with a specific time zone?
+/*BigCalendar.js => can use moment.tz() method to create a moment object with a specific time zone? use to make sure in EST but may not need it since moment uses my computer's timezone setting 
+
+------------> start of code
+
 const startDateTime = moment.tz(`${task.deadline} ${task.startTime}`, dateFormat, 'America/New_York').toDate();
 const endDateTime = moment.tz(`${task.deadline} ${task.endTime}`, dateFormat, 'America/New_York').toDate();
+
+<--------------------end of code 
+*/
+
 
 
 

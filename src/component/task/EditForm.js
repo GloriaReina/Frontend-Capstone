@@ -4,7 +4,7 @@ import "./EditForm.css";
 
 
 // task/taskSubmitted prop received from Homepage
-export const EditForm = ({task,fetchAllTasks, handleTaskCompletion,showAlert, selectedTask, setShowModal, showModal}) => {
+export const EditForm = ({task,fetchAllTasks, handleTaskCompletion,showAlert, selectedTask, setShowModal, showModal, setSelectedTask}) => {
 
     
   const [isEditing, setIsEditing] = useState(false);
@@ -17,12 +17,15 @@ export const EditForm = ({task,fetchAllTasks, handleTaskCompletion,showAlert, se
   const [editStartTime, setEditStartTime] = useState(task.startTime);
   const [editEndTime, setEditEndTime] = useState(task.endTime);
   const [editCompleted, setEditCompleted] = useState(task.completed);
-  
+  const [selectTaskId, setSelectedTaskId] = useState(task.id)
  
 
 /*Pass the task.id(a number) to the handleTaskCompletion function in AllTasks(calls it taskId) so it can compare if the the task array to find the selected task*/
-  const handleCheckboxChange = (id) => {
-      handleTaskCompletion(id); 
+ 
+const handleCheckboxChange = (id) => {
+  
+      handleTaskCompletion(id);
+       
   };
  
 
@@ -230,24 +233,12 @@ onClick={() => handleDeleteTask(task.id)}
         
         {/*selectedTask: state var used to determine whether a task has been selected or not, then check if its the same as the task being rendered.*/}
 
-        {selectedTask === task && showModal && (
+        {/* {selectedTask === task && showModal && (
            setShowModal(true)
-      )}
+           
+      )} */}
 
-      <Modal show={showModal} onHide={() => setShowModal(false)}>
-        <Modal.Header >
-          <Modal.Title className="image-container">
-          Great Job! One less thing on your plate!!
-            <img src="/images/cartoon-office-celebration-15570488.jpg" alt=" Picture of people celebrating" className="firework-img"/>
-            </Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <p><em>Fill in completion time to mark task as complete!</em></p>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={() => setShowModal(false)}>Close</Button>
-        </Modal.Footer>
-      </Modal>
+     
       
 
         </>

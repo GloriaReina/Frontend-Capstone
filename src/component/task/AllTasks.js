@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Dropdown,Container,Col,Row } from "react-bootstrap";
+import { Dropdown,Container,Col,Row, Modal,Button } from "react-bootstrap";
 import { EditForm } from "./EditForm";
 import { BigCalendar } from "./BigCalendar";
 import Alert from 'react-bootstrap/Alert';
@@ -97,12 +97,13 @@ export const AllTasks = () => {
         console.log("this should be task to complete", taskToComplete)
     
     //now have a state var that holds the id of the selected task and can pass this to edit form
-    setSelectedTask(taskToCompleteId)
+    // setSelectedTask(taskToCompleteId)
     
     
 
     if (taskToComplete.actualTime.trim() === '') {
       setShowModal(true)
+      console.log("alltask")
     } 
     else{
       const updatedTasks = tasks.map((task) => {
@@ -185,6 +186,7 @@ export const AllTasks = () => {
                 showModal={showModal}
                 setShowModal={setShowModal}
                 selectedTask={selectedTask}
+                setSelectedTask={setSelectedTask}
               />
               </Col>
               </Row>
@@ -193,6 +195,20 @@ export const AllTasks = () => {
               </Container> 
               
       </Dropdown>
+      <Modal show={showModal} >
+        <Modal.Header >
+          <Modal.Title className="image-container">
+          Great Job! One less thing on your plate!!
+            <img src="/images/cartoon-office-celebration-15570488.jpg" alt=" Picture of people celebrating" className="firework-img"/>
+            </Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <p><em>Fill in completion time to mark task as complete!</em></p>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={() => setShowModal(false)}>Close</Button>
+        </Modal.Footer>
+      </Modal>
     </>
   );
 };
