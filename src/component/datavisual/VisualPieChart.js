@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import { Doughnut } from 'react-chartjs-2';
+import { Container, Row, Col } from "react-bootstrap";
+import "./VisualPieChart.css"
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
@@ -75,11 +77,23 @@ filterTaskArrayData.forEach((task) => {
         },
       ],
     };
+ 
+  return (
+    <div className="pie-container mt-5 "style={{ width: 300, height: 300 }}>
+      <Container>
+        <Row>
+          <Col className="line-chart-container">
+          <Doughnut data={data} />
+          </Col>
+        </Row>
+      </Container>
+    </div>
+  );
+};
+
+        
+       
     
-      return <div style={{width:600, height:300}}>
-        <Doughnut data={data} />
-        </div>
-    }
   
   
   

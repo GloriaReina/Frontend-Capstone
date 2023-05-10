@@ -93,8 +93,7 @@ export const AllTasks = () => {
     const taskToComplete = tasks.find((task) => task.id === taskId);
  
      const taskToCompleteId= taskToComplete.id 
-        console.log(taskToCompleteId)
-        console.log("this should be task to complete", taskToComplete)
+       
     
     if (taskToComplete.actualTime.trim() === '') {
       setShowModal(true)
@@ -130,11 +129,11 @@ export const AllTasks = () => {
   }
 
   return (
-    <>
+    <><h1 className="mt-5">~ My Calendar ~</h1>
       <BigCalendar className="big-calendar"/>
 
-      <Dropdown>
-        <Dropdown.Toggle variant="primary" id="dropdown-basic">
+      <Dropdown className="dropdown d-grid gap-2 mt-3">
+        <Dropdown.Toggle variant="outline-warning" size="sm" className="dropdown-basic  ">
           Select Task Display View
         </Dropdown.Toggle>
         <Dropdown.Menu>
@@ -170,9 +169,10 @@ export const AllTasks = () => {
         <Container className="task-container" > 
           {sortedFilteredTasks.map((task) => (
             <> 
-              <Row className={`urgency-${task.urgencyLevel}`}>
-              <Col key={task.id}>{`${task.description} by ${task.deadline}`}
+              <Row className={`urgency-${task.urgencyLevel} mt-3`}>
+              <Col key={task.id} xs={8} >{`${task.description} by ${task.deadline}`}</Col>
                {/* sent task and fetchAllTasks as props to EditForm */}
+               <Col className="button-column text-end mt-1">
                <EditForm
                 task={task}
                 fetchAllTasks={fetchAllTasks}
