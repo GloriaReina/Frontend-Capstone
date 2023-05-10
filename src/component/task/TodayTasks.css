@@ -1,6 +1,10 @@
 
 h1{
   text-align: center;
+  color:rgb(231, 158, 23);
+  text-decoration: overline underline;
+  text-decoration-color:  rgb(231, 158, 23);
+  ; 
 }
 
 .urgency-1 {
@@ -18,12 +22,6 @@ h1{
     background-color: rgb(234, 165, 226);
   }
 
-  .today-task-container{
-    display: flex;
-    flex-direction: row;
-    /* justify-content: space-between; */
-    /* align-items: flex-start; */
-  }
 
   /* .today-task {
     background-color:  #f0ebe9eb;

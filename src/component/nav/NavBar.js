@@ -20,7 +20,7 @@ export const NavBar = () => {
     
                     <NavLink href="/visuals"  bsPrefix="nav-link-custom">Visuals</NavLink>
                     
-                    <NavLink href="/profile"  bsPrefix="nav-link-custom" >Profile</NavLink>
+                    {/* <NavLink href="/profile"  bsPrefix="nav-link-custom" >Profile</NavLink> */}
                     
                     
                     {isLoggedIn &&

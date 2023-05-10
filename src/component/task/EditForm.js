@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { Container, Button, Form, CloseButton, Col,Row } from "react-bootstrap";
-import Alert from 'react-bootstrap/Alert';
+import { Button, Form, CloseButton, Col,Row } from "react-bootstrap";
+import "./EditForm.css";
+
 
 // task/taskSubmitted prop received from Homepage
-export const EditForm = ({task,fetchAllTasks, handleTaskCompletion,showAlert, setShowAlert, selectedTask}) => {
+export const EditForm = ({task,fetchAllTasks, handleTaskCompletion}) => {
 
     
   const [isEditing, setIsEditing] = useState(false);
@@ -16,16 +17,15 @@ export const EditForm = ({task,fetchAllTasks, handleTaskCompletion,showAlert, se
   const [editStartTime, setEditStartTime] = useState(task.startTime);
   const [editEndTime, setEditEndTime] = useState(task.endTime);
   const [editCompleted, setEditCompleted] = useState(task.completed);
-
+  const [selectTaskId, setSelectedTaskId] = useState(task.id)
  
 
 /*Pass the task.id(a number) to the handleTaskCompletion function in AllTasks(calls it taskId) so it can compare if the the task array to find the selected task*/
-  const handleCheckboxChange = (id) => {
-    // if (task.actualTime.trim() === '') {
-    //   setShowAlert(true);
-    // } else {
+ 
+const handleCheckboxChange = (id) => {
+  
       handleTaskCompletion(id);
-    // }
+       
   };
  
 
@@ -230,18 +230,6 @@ onClick={() => handleDeleteTask(task.id)}
         label= "Check to complete" 
         checked={task.completed}
         onChange={() => handleCheckboxChange(task.id)} />
-        
-        {showAlert && selectedTask && (
-        <Alert variant="danger" onClose={() => setShowAlert(false)} dismissible>
-          <Alert.Heading>One less thing on your plate!!
-          </Alert.Heading>
-          <hr />
-          <p>
-          Fill in task completion time before marking task as complete!.</p>
-        </Alert>
-      )}
-      
-
         </>
       )}
     </Form>

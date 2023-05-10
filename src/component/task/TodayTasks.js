@@ -1,28 +1,39 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import { EditForm } from "./EditForm";
-import { Container,Col,Row } from "react-bootstrap";
+import { Container, Col, Row, Modal, Button } from "react-bootstrap";
 import "./TodayTasks.css";
-
-
+import { isSameDay } from "date-fns";
 //recieved props from homepage
 export const TodayTasks = ({ tasks, fetchAllTasks, setTasks }) => {
-
   const [showAlert, setShowAlert] = useState(false);
-
+  const [selectedTask, setSelectedTask] = useState("");
+  const [showModal, setShowModal] = useState(false);
 
   /*value of taskId(can have any name) comes from  task.id property of the task object thats selected when user click its checkbox
 
   updatedTask array has all the original tasks, but with the completed status of the task with the matching taskId set to true */
   const handleTaskCompletion = (taskId) => {
-    const updatedTasks = tasks.map((task) => {
-      if (task.id === taskId) {
-        return { ...task, completed: true };
-      }
-      return task;
-    });
+    const taskToComplete = tasks.find((task) => task.id === taskId);
+ 
+     const taskToCompleteId= taskToComplete.id 
+        console.log(taskToCompleteId)
+        console.log("this should be task to complete", taskToComplete)
+ 
 
-    //setTask prop from HomePage to update state var to updatedTasks so that on the homepage when user checks checkbox the state variable is updated so that the completed property is set to true and the task is removed from view
-    setTasks(updatedTasks);
+    if (taskToComplete.actualTime.trim() === '') {
+      setShowModal(true)
+      
+    } 
+    else{
+      const updatedTasks = tasks.map((task) => {
+        if (task.id === taskId) {
+          return { ...task, completed: true };
+        }
+        return task;
+      });
+      setTasks(updatedTasks);
+    
+ 
 
     /*find the updated task with the matching taskId using the find method. */
     const updatedTask = updatedTasks.find((task) => task.id === taskId);
@@ -40,26 +51,32 @@ export const TodayTasks = ({ tasks, fetchAllTasks, setTasks }) => {
       fetchAllTasks();
     });
   };
+  }
+
 
   /*Function that filters the list of tasks based on the current date & 
     returns a new array that contains only the tasks that are due on the current date.*/
 /*new Date() constructor a Date object, without any arguments= current date and time... with a Date object, can use various methods to retrieve or modify its value, such as getDate(), getMonth(), getFullYear(), getTime() .*/
-    const filterTasksByDate = () => {
-      const currentDate = new Date();
-      return tasks.filter((task) => {
-        const dueDate = new Date( task.deadline);
-         
-        return (
-    /* add UTC(Coordinated Universal Time) in order to have consistent time zone = avoid issues with daylight saving time changes.
-    
-    the getDate method returns the day of the month based on the local time zone of the computer= the tasks for the current day were not  displaying because the current day dates in my database where being converted to be a day behind
-    */
-          dueDate.getUTCDate() === currentDate.getUTCDate() &&
-          dueDate.getUTCMonth() === currentDate.getUTCMonth() &&
-          dueDate.getUTCFullYear() === currentDate.getUTCFullYear()
-        );
-      });
-    };
+
+const filterTasksByDate = () => {
+  const currentDate = new Date();
+  return tasks.filter((task) => {
+    const dueDate = new Date( task.deadline);
+     
+    return (
+
+/* add UTC(Coordinated Universal Time) in order to have consistent time zone = avoid issues with daylight saving time changes.
+
+the getDate method returns the day of the month based on the local time zone of the computer= the tasks for the current day were not  displaying because the current day dates in my database where being converted to be a day behind
+*/
+      dueDate.getUTCDate() === currentDate.getUTCDate() &&
+      dueDate.getUTCMonth() === currentDate.getUTCMonth() &&
+      dueDate.getUTCFullYear() === currentDate.getUTCFullYear()
+    );
+  });
+};
+
+  
 
   let filteredTasks = filterTasksByDate();
   filteredTasks = filteredTasks.filter((task) => {
@@ -76,37 +93,49 @@ export const TodayTasks = ({ tasks, fetchAllTasks, setTasks }) => {
   );
 
   return (
-    <React.Fragment >
-    
-      <div className="today-task">
-      <h1>Tasks due today</h1>
-          {sortedFilteredTasks.map((task) => (
-            <>
+    <>
+      
+        <h1 className="mt-5">~ Tasks due today ~</h1>
+        {sortedFilteredTasks.map((task) => (
+          <>
             <div className="today-task-container">
-            <Container >  
-              <Row className={`urgency-${task.urgencyLevel}`}>
-              <Col key={task.id}>{`${task.description} `}
+              <Container>
+                <Row className={`urgency-${task.urgencyLevel} mt-3`} >
+                  <Col className= "task-column" xs={8}  key={task.id}>{`${task.description} `}</Col>
+                  <Col className="button-column text-end mt-1">
+                    <EditForm
+                      task={task}
+                      fetchAllTasks={fetchAllTasks}
+                      handleTaskCompletion={handleTaskCompletion}
+                      showAlert={showAlert}
+                      showModal={showModal}
+                      setShowModal={setShowModal}
+                      selectedTask={selectedTask}
+                      setSelectedTask={setSelectedTask}
+                      //  //pass fetchALLTasks prop EditForm component so that it can use it after the PUT request to update page with current state; and task so it can have access to task object for edits
+                    />
+                  </Col>
+                </Row>
+              </Container>
               
-              </Col>
-              <Col className="button-column">
-              <EditForm
-                task={task}
-                fetchAllTasks={fetchAllTasks}
-                handleTaskCompletion={handleTaskCompletion}
-                showAlert={showAlert}
-                setShowAlert={setShowAlert}
-                //  //pass fetchALLTasks prop EditForm component so that it can use it after the PUT request to update page with current state; and task so it can have access to task object for edits
-              />
-              </Col>
-              </Row>
-              </Container> 
-              </div>
-              
-              
-            </>
-          ))}
-        
-      </div>
-    </React.Fragment>
+            </div>
+          
+          </>
+        ))}
+        <Modal show={showModal} >
+        <Modal.Header >
+          <Modal.Title className="image-container">
+          Great Job! One less thing on your plate!!
+            <img src="/images/cartoon-office-celebration-15570488.jpg" alt=" Picture of people celebrating" className="firework-img"/>
+            </Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <p><em>Fill in completion time to mark task as complete!</em></p>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={() => setShowModal(false)}>Close</Button>
+        </Modal.Footer>
+      </Modal>
+    </>
   );
 };

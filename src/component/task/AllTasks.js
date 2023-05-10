@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Dropdown,Container,Col,Row } from "react-bootstrap";
+import { Dropdown,Container,Col,Row, Modal,Button } from "react-bootstrap";
 import { EditForm } from "./EditForm";
 import { BigCalendar } from "./BigCalendar";
 import Alert from 'react-bootstrap/Alert';
@@ -9,7 +9,7 @@ export const AllTasks = () => {
   const [filter, setFilter] = useState("incomplete tasks");
   const [showAlert, setShowAlert] = useState(false);
   const [selectedTask, setSelectedTask]= useState("")
-
+  const [showModal, setShowModal] = useState(false)
 
   const localAppUser = localStorage.getItem("app_user");
   const AppUserObject = JSON.parse(localAppUser);
@@ -30,19 +30,6 @@ export const AllTasks = () => {
   useEffect(() => {
     fetchAllTasks();
   }, []);
-
-  // // ---------------->/*PROPS */------------------//
-  /* This updateTaskDisplayed Function is passed to the EditForm component where it is called in the handleSaveClick funtion after the PUT request. All the tasks displayed to user to be updated with the edited info = show the task as it now is in state*/
-  // ---------------->/*PROPS */------------------//
-
-  const updateTaskDisplayed = (editedTask) => {
-    setTasks((prevTasks) =>
-      prevTasks.map((task) =>
-        // if the task id matches the updated task id, return the updated task, otherwise return the task
-        task.id === editedTask.id ? editedTask : task
-      )
-    );
-  };
 
   /* 
     When user selects an option from the dropdown menu, the onclick event will cause the state variable to be updated to one of the conditional statements below
@@ -105,15 +92,14 @@ export const AllTasks = () => {
   const handleTaskCompletion = (taskId) => {
     const taskToComplete = tasks.find((task) => task.id === taskId);
  
-    console.log("this should be task to complete", taskToComplete)
+     const taskToCompleteId= taskToComplete.id 
+       
     
-    //now have a state var that holds the id of the selected task and can pass this to edit form
-    setSelectedTask(taskToComplete)
-    console.log(selectedTask)
-
     if (taskToComplete.actualTime.trim() === '') {
-      setShowAlert(true);
-    } else {
+      setShowModal(true)
+     
+    } 
+    else{
       const updatedTasks = tasks.map((task) => {
         if (task.id === taskId) {
           return { ...task, completed: true };
@@ -143,11 +129,11 @@ export const AllTasks = () => {
   }
 
   return (
-    <>
-      <BigCalendar />
+    <><h1 className="mt-5">~ My Calendar ~</h1>
+      <BigCalendar className="big-calendar"/>
 
-      <Dropdown>
-        <Dropdown.Toggle variant="primary" id="dropdown-basic">
+      <Dropdown className="dropdown d-grid gap-2 mt-3">
+        <Dropdown.Toggle variant="outline-warning" size="sm" className="dropdown-basic  ">
           Select Task Display View
         </Dropdown.Toggle>
         <Dropdown.Menu>
@@ -183,16 +169,19 @@ export const AllTasks = () => {
         <Container className="task-container" > 
           {sortedFilteredTasks.map((task) => (
             <> 
-              <Row className={`urgency-${task.urgencyLevel}`}>
-              <Col key={task.id}>{`${task.description} by ${task.deadline}`}
+              <Row className={`urgency-${task.urgencyLevel} mt-3`}>
+              <Col key={task.id} xs={8} >{`${task.description} by ${task.deadline}`}</Col>
                {/* sent task and fetchAllTasks as props to EditForm */}
+               <Col className="button-column text-end mt-1">
                <EditForm
                 task={task}
                 fetchAllTasks={fetchAllTasks}
                 handleTaskCompletion={handleTaskCompletion}
                 showAlert={showAlert}
-                setShowAlert={setShowAlert}
+                showModal={showModal}
+                setShowModal={setShowModal}
                 selectedTask={selectedTask}
+                setSelectedTask={setSelectedTask}
               />
               </Col>
               </Row>
@@ -201,6 +190,20 @@ export const AllTasks = () => {
               </Container> 
               
       </Dropdown>
+      <Modal show={showModal} >
+        <Modal.Header >
+          <Modal.Title className="image-container">
+          Great Job! One less thing on your plate!!
+            <img src="/images/cartoon-office-celebration-15570488.jpg" alt=" Picture of people celebrating" className="firework-img"/>
+            </Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <p><em>Fill in completion time to mark task as complete!</em></p>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={() => setShowModal(false)}>Close</Button>
+        </Modal.Footer>
+      </Modal>
     </>
   );
 };

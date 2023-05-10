@@ -1,7 +1,18 @@
-import { Line } from 'react-chartjs-2';
-import {Chart as ChartJS,CategoryScale,LinearScale,PointElement,LineElement,Title,Tooltip,Legend,} from 'chart.js';
-import { useEffect, useState } from 'react';
-import moment from 'moment';
+import { Line } from "react-chartjs-2";
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend,
+} from "chart.js";
+import { useEffect, useState } from "react";
+import moment from "moment";
+import { Container, Row, Col, Card } from "react-bootstrap";
+import "./VisualLineGraph.css";
 
 ChartJS.register(
   CategoryScale,
@@ -13,113 +24,128 @@ ChartJS.register(
   Legend
 );
 
-
 export const VisualLineGraph = () => {
-    const[chartTaskData, setChartTaskData] = useState([]);
+  const [chartTaskData, setChartTaskData] = useState([]);
 
-
-    const fetchDataAllTasks = () => {
+  const fetchDataAllTasks = () => {
     return fetch(`http://localhost:8088/tasks`)
       .then((response) => response.json())
       .then((tasksArrayData) => {
-          
         setChartTaskData(tasksArrayData);
       });
-      
   };
-  
+
   useEffect(() => {
-  fetchDataAllTasks();
-  
+    fetchDataAllTasks();
   }, []);
 
+  // Filter tasks by completion status (only include completed tasks) and  tasks with user input for actualTime
+  const completedTasks = chartTaskData;
 
-// Filter tasks by completion status (only include completed tasks) and  tasks with user input for actualTime
-    const completedTasks = chartTaskData
+  const filterTaskArrayData = completedTasks.filter(
+    (task) => task.completed === true && task.actualTime !== ""
+  );
 
-    const filterTaskArrayData = completedTasks.filter(task => task.completed === true && task.actualTime !== "");
+  /*From filteredTaskArrayDay--->Only select tasks from the past week. */
 
+  const tasksPastWeek = filterTaskArrayData.filter((task) => {
+    //create a new moment object for each task's deadline property
+
+    const taskDate = moment(task.deadline);
+
+    // create a new moment object representing one week ago using the moment().subtract() method. We pass in the number of days we want to subtract (7) and the unit of time we're subtracting (days).
+
+    const oneWeekAgo = moment().subtract(7, "days");
+
+    // compare each taskDate to oneWeekAgo using the isAfter() method. If taskDate is after oneWeekAgo, the task is included in the filtered array
+
+    return taskDate.isAfter(oneWeekAgo);
+  });
+
+
+/*----------------------------------------------------------------------*/
   
-/*From filteredTaskArrayDay--->Only select tasks from the past week. */
-
-const tasksPastWeek = filterTaskArrayData.filter(task => {
-	//create a new moment object for each task's deadline property
- 	
-		const taskDate = moment(task.deadline);
-
-	// create a new moment object representing one week ago using the moment().subtract() method. We pass in the number of days we want to subtract (7) and the unit of time we're subtracting (days).
-  		
-		const oneWeekAgo = moment().subtract(7, 'days');
-
-	// compare each taskDate to oneWeekAgo using the isAfter() method. If taskDate is after oneWeekAgo, the task is included in the 	 	   filtered array
-
-  		return taskDate.isAfter(oneWeekAgo);
-});
-
-
-
-
-    // Map filterTaskArrayData array to create the data format expected by Chart.js
-    const data = {
-      labels: tasksPastWeek.map((task) => task.id),
-      datasets: [
-        {
-          label: "Estimated Time",
-          data: tasksPastWeek.map((task) => task.estimatedTime),
-          fill: false,
-          borderColor: "#f00"
-        },
-        {
-          label: "Actual Time",
-          data: tasksPastWeek.map((task) => task.actualTime),
-          fill: false,
-          borderColor: "#83E077"
-        }
-      ]
-    };
+/* map through tasksPastWeek and grab day name for each deadline date*/
+  const taskDates = tasksPastWeek.map(task => new Date (task.deadline));
   
-    const options = {
-      title: {
-        display: true,
-        text: "Task Time Analysis"
+  const nameDayArray = taskDates.map(date => date.toLocaleString(
+    'default', {weekday: 'long'}
+  ));
+
+/*----------------------------------------------------------------------*/
+
+/*----------------------------------------------------------------------*/
+const estTimeArray= tasksPastWeek.map((task) => task.estimatedTime && task.deadline)
+console.log(estTimeArray)
+
+const sum = estTimeArray.reduce((accumulator, currentValue) => accumulator + currentValue, 0);
+
+const averageEstTime = sum / estTimeArray.length;
+
+console.log(averageEstTime);
+
+/*----------------------------------------------------------------------*/
+  // Map filterTaskArrayData array to create the data format expected by Chart.js
+  const data = {
+    labels: nameDayArray,
+    datasets: [
+      {
+        label: "Estimated Time",
+        data: tasksPastWeek.map((task) => task.estimatedTime),
+        fill: false,
+        borderColor: "#f00",
       },
-      scales: {
-        yAxes: [
-          {
-            ticks: {
-              beginAtZero: true
-            }
-          }
-        ]
-      }
-    };
-  
-    return <div style={{width:600, height:300}}>
-
-        <Line data={data} options={options} />
-    </div> 
+      {
+        label: "Actual Time",
+        data: tasksPastWeek.map((task) => task.actualTime),
+        fill: false,
+        borderColor: "#83E077",
+      },
+    ],
   };
-  
-  export default VisualLineGraph;
-  
 
+  const options = {
+    title: {
+      display: true,
+      text: "Task Time Analysis",
+    },
+    scales: {
+      yAxes: [
+        {
+          ticks: {
+            beginAtZero: true,
+          },
+        },
+      ],
+    },
+  };
 
+  return (
+    <div className="chart-container mt-5 " style={{ width: 600, height: 300 }}>
+      <Container >
+        <Row>
+          <Col  className="line-chart-container">
+            <Line data={data} options={options} />
+          </Col>
+          <Col xs={8}>
+          <Card className="mt-5 ">
+      {/* <Card.Header>Featured</Card.Header> */}
+      <Card.Body>
+        <Card.Title>Special title treatment</Card.Title>
+        <Card.Text>
+          With supporting text below as a natural lead-in to additional content.
+        </Card.Text>
+        {/* <Button variant="primary">Go somewhere</Button> */}
+      </Card.Body>
+    </Card>
+          </Col>
+        </Row>
+      </Container>
+    </div>
+  );
+};
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+export default VisualLineGraph;
 
 // export const VisualLineGraph = () => {
 //   const completedTasks = [

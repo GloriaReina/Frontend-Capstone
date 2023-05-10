@@ -114,10 +114,11 @@ export const TaskForm = ({ fetchAllTasks}) => {
       )}
       <Container>
         <Form>
-        <div className="add-new-task-button">
-              <Button
-                bsPrefix="newtask-button"
-                variant="success"
+        <div className="add-new-task-button d-grid mt-5">
+              <Button className="new-task "
+                // bsPrefix="newtask-button"
+                variant="outline-warning"
+                size="sm"
                 onClick= {toggleAddTaskForm}
               >
                 + New Task

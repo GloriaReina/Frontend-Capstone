@@ -2,6 +2,12 @@ import React, { useState, useEffect } from "react";
 import { Calendar, momentLocalizer } from "react-big-calendar";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import moment from "moment";
+import './BigCalendar.css';
+import {Container,Row,Col} from "react-bootstrap";
+
+
+
+
 
 export const BigCalendar = () => {
   const [tasks, setTasks] = useState([]);
@@ -48,13 +54,39 @@ export const BigCalendar = () => {
   });
 
   return (
-    <div className="myCustomHeight" style={{ width: 900, height: 600 }}>
-      <Calendar
+    <div className="calendar-container mt-5 " >
+        {/* <Calendar 
+        localizer={localizer}
+        events={taskList}
+        startAccessor="start"
+        endAccessor="end"
+      /> */}
+      <Container >
+      <Row >
+        <Col className="calendar-container" style={{ width: 900, height: 700, }}>
+        <Calendar 
         localizer={localizer}
         events={taskList}
         startAccessor="start"
         endAccessor="end"
       />
+        </Col>
+      </Row>
+    </Container>
     </div>
   );
 };
+
+
+{/* <Container>
+      <Row>
+        <Col>
+        <Calendar 
+        localizer={localizer}
+        events={taskList}
+        startAccessor="start"
+        endAccessor="end"
+      />
+        </Col>
+      </Row>
+    </Container> */}

@@ -1,6 +1,118 @@
-//BigCalendar.js => can use moment.tz() method to create a moment object with a specific time zone?
+const actTasksWithDate = tasksPastWeek.map(task => ({
+  date: new Date(task.deadline).toLocaleDateString(),
+  taskTime: task.actualTime
+}));
+
+const sumByDate = actTasksWithDate.reduce((acc, task) => {
+  if (!acc[task.deadline]) {
+    acc[task.deadline] = { total: 0, count: 0 };
+  }
+
+  acc[task.deadline].total += task.actualTime;
+  acc[task.deadline].count++;
+
+  return acc;
+}, {});
+
+const actAverageByDate = Object.entries(sumByDate).map(([deadline, { total, count }]) => ({
+  deadline,
+  average: total / count
+}));
+
+
+const estTasksWithDate = tasksPastWeek.map(task => ({
+  date: new Date(task.deadline).toLocaleDateString(),
+  taskTime: task.estimatedTime
+}));
+
+const sumByDate = estTasksWithDate.reduce((acc, task) => {
+  if (!acc[task.deadline]) {
+    acc[task.deadline] = { total: 0, count: 0 };
+  }
+
+  acc[task.deadline].total += task.estimatedTime;
+  acc[task.deadline].count++;
+
+  return acc;
+}, {});
+
+const estAverageByDate = Object.entries(sumByDate).map(([deadline, { total, count }]) => ({
+  deadline,
+  average: total / count
+}));
+
+
+
+console.log(averageByDate);
+ 
+ 
+
+ 
+ /*Function that filters the list of tasks based on the current date & returns a new array that contains only the tasks that are due on the current date.*/
+ const filterTasksByDate = () => {
+  const currentDate = new Date();
+  const estOffset = 4 * 60; // Eastern Standard Time is UTC-4
+  
+  return tasks.filter((task) => {
+    const dueDate = new Date(task.deadline);
+    console.log(dueDate.getTime())
+    /*Convert my task date wich is in EST(my laptop's timezone) to UTC: get dealine time, add 4 hrs(estOffset value) and multiply by 60 (which gives us number in minutes) and then by 1000 (which gives us  number of milliseconds). The result gives a deadline with UTC timestamp */
+    // console.log("before:" , dueDate.getTime())
+    const utcDueDate = new Date(
+      dueDate.getTime() + estOffset  // convert to UTC by adding EST offset
+      
+    );
+    console.log("after:" , utcDueDate.getTime())
+    return (
+      //convert current date to UTC & compare to my tasks' utcDueDate to have consistent time zone
+      utcDueDate.getDate() === currentDate.getUTCDate() &&
+      utcDueDate.getMonth() === currentDate.getUTCMonth() &&
+      utcDueDate.getFullYear() === currentDate.getUTCFullYear()
+    );
+  });
+};
+
+
+
+
+
+/*Function that filters the list of tasks based on the current date & 
+    returns a new array that contains only the tasks that are due on the current date.*/
+/*new Date() constructor a Date object, without any arguments= current date and time... with a Date object, can use various methods to retrieve or modify its value, such as getDate(), getMonth(), getFullYear(), getTime() .*/
+
+// const filterTasksByDate = () => {
+//   const currentDate = new Date();
+//   return tasks.filter((task) => {
+//     const dueDate = new Date( task.deadline);
+     
+//     return (
+
+/* add UTC(Coordinated Universal Time) in order to have consistent time zone = avoid issues with daylight saving time changes.
+
+the getDate method returns the day of the month based on the local time zone of the computer= the tasks for the current day were not  displaying because the current day dates in my database where being converted to be a day behind
+*/
+//       dueDate.getUTCDate() === currentDate.getUTCDate() &&
+//       dueDate.getUTCMonth() === currentDate.getUTCMonth() &&
+//       dueDate.getUTCFullYear() === currentDate.getUTCFullYear()
+//     );
+//   });
+// };
+
+/*-------end of original conversion to UTC before modifying to subtract 4 hours-------*/
+
+
+
+
+/*BigCalendar.js => can use moment.tz() method to create a moment object with a specific time zone? use to make sure in EST but may not need it since moment uses my computer's timezone setting 
+
+------------> start of code
+
 const startDateTime = moment.tz(`${task.deadline} ${task.startTime}`, dateFormat, 'America/New_York').toDate();
 const endDateTime = moment.tz(`${task.deadline} ${task.endTime}`, dateFormat, 'America/New_York').toDate();
+
+<--------------------end of code 
+*/
+
 
 
 
@@ -315,3 +427,18 @@ export const AllTasks = () => {
   );
 };
 */
+
+
+  // // ---------------->/*PROPS */------------------//
+  /* DID NOT END UP USING: This updateTaskDisplayed Function is passed to the EditForm component where it is called in the handleSaveClick funtion after the PUT request. All the tasks displayed to user to be updated with the edited info = show the task as it now is in state*/
+  // ---------------->/*PROPS */------------------//
+
+  // const updateTaskDisplayed = (editedTask) => {
+  //   setTasks((prevTasks) =>
+  //     prevTasks.map((task) =>
+  //       // if the task id matches the updated task id, return the updated task, otherwise return the task
+  //       task.id === editedTask.id ? editedTask : task
+  //     )
+  //   );
+  // };
+
