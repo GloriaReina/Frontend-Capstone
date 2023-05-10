@@ -18,15 +18,11 @@ export const TodayTasks = ({ tasks, fetchAllTasks, setTasks }) => {
      const taskToCompleteId= taskToComplete.id 
         console.log(taskToCompleteId)
         console.log("this should be task to complete", taskToComplete)
-    
-    //now have a state var that holds the id of the selected task and can pass this to edit form
-    // setSelectedTask(taskToCompleteId)
-    
-    
+ 
 
     if (taskToComplete.actualTime.trim() === '') {
       setShowModal(true)
-      console.log("alltask")
+      
     } 
     else{
       const updatedTasks = tasks.map((task) => {
@@ -96,8 +92,8 @@ export const TodayTasks = ({ tasks, fetchAllTasks, setTasks }) => {
   );
 
   return (
-    <React.Fragment>
-      <div className="today-task">
+    <>
+      
         <h1>Tasks due today</h1>
         {sortedFilteredTasks.map((task) => (
           <>
@@ -122,7 +118,10 @@ export const TodayTasks = ({ tasks, fetchAllTasks, setTasks }) => {
               </Container>
               
             </div>
-            <Modal show={showModal} >
+          
+          </>
+        ))}
+        <Modal show={showModal} >
         <Modal.Header >
           <Modal.Title className="image-container">
           Great Job! One less thing on your plate!!
@@ -135,10 +134,7 @@ export const TodayTasks = ({ tasks, fetchAllTasks, setTasks }) => {
         <Modal.Footer>
           <Button variant="secondary" onClick={() => setShowModal(false)}>Close</Button>
         </Modal.Footer>
-      </Modal>
-          </>
-        ))}
-      </div>
-    </React.Fragment>
+      </Modal>g
+    </>
   );
 };

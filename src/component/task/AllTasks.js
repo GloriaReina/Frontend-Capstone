@@ -96,14 +96,9 @@ export const AllTasks = () => {
         console.log(taskToCompleteId)
         console.log("this should be task to complete", taskToComplete)
     
-    //now have a state var that holds the id of the selected task and can pass this to edit form
-    // setSelectedTask(taskToCompleteId)
-    
-    
-
     if (taskToComplete.actualTime.trim() === '') {
       setShowModal(true)
-      console.log("alltask")
+     
     } 
     else{
       const updatedTasks = tasks.map((task) => {

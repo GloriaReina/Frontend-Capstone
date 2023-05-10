@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { Button, Form, CloseButton, Col,Row, Modal } from "react-bootstrap";
+import { Button, Form, CloseButton, Col,Row } from "react-bootstrap";
 import "./EditForm.css";
 
 
 // task/taskSubmitted prop received from Homepage
-export const EditForm = ({task,fetchAllTasks, handleTaskCompletion,showAlert, selectedTask, setShowModal, showModal, setSelectedTask}) => {
+export const EditForm = ({task,fetchAllTasks, handleTaskCompletion}) => {
 
     
   const [isEditing, setIsEditing] = useState(false);
@@ -230,17 +230,6 @@ onClick={() => handleDeleteTask(task.id)}
         label= "Check to complete" 
         checked={task.completed}
         onChange={() => handleCheckboxChange(task.id)} />
-        
-        {/*selectedTask: state var used to determine whether a task has been selected or not, then check if its the same as the task being rendered.*/}
-
-        {/* {selectedTask === task && showModal && (
-           setShowModal(true)
-           
-      )} */}
-
-     
-      
-
         </>
       )}
     </Form>

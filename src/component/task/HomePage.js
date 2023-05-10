@@ -36,9 +36,9 @@ export const HomePage = ()=>{
     
     return(
         <>
-        <TaskForm fetchAllTasks={fetchAllTasks}/>
+       
         <TodayTasks tasks={tasks} fetchAllTasks={fetchAllTasks} setTasks={setTasks} />
-        
+        <TaskForm fetchAllTasks={fetchAllTasks}/>
         </>
         
     )
