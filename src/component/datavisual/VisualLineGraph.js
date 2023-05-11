@@ -67,7 +67,7 @@ export const VisualLineGraph = () => {
   
 /* map through tasksPastWeek and grab day name for each deadline date*/
   const taskDates = tasksPastWeek.map(task =>  new Date(task.deadline).toLocaleString("en-US", {timeZone: "UTC",weekday: 'long'}));
-  git
+  
 
  
 /*----------------------------------------------------------------------*/
