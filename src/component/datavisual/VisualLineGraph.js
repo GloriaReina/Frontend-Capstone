@@ -66,12 +66,10 @@ export const VisualLineGraph = () => {
 /*----------------------------------------------------------------------*/
   
 /* map through tasksPastWeek and grab day name for each deadline date*/
-  const taskDates = tasksPastWeek.map(task => new Date (task.deadline));
-  
-  const nameDayArray = taskDates.map(date => date.toLocaleString(
-    'default', {weekday: 'long'}
-  ));
+  const taskDates = tasksPastWeek.map(task =>  new Date(task.deadline).toLocaleString("en-US", {timeZone: "UTC",weekday: 'long'}));
+  git
 
+ 
 /*----------------------------------------------------------------------*/
 
 /*----------------------------------------------------------------------*/
@@ -87,7 +85,7 @@ const averageEstTime = sum / estTimeArray.length;
 /*----------------------------------------------------------------------*/
   // Map filterTaskArrayData array to create the data format expected by Chart.js
   const data = {
-    labels: nameDayArray,
+    labels: taskDates,
     datasets: [
       {
         label: "Estimated Time",

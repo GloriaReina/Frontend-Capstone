@@ -59,8 +59,13 @@ export const AllTasks = () => {
     */
 
   const filteredTasks = tasks.filter((task) => {
-    const taskDate = moment(task.deadline)
-    const currentDay = moment()
+    let taskDate = moment(task.deadline).valueOf()
+    let today = moment().valueOf()
+
+console.log("task day", taskDate)
+console.log("current day", today)
+console.log("filter:",filter)
+console.log("bool:",taskDate < today)
 
     if (filter === "incomplete tasks") {
       return !task.completed;
@@ -70,7 +75,7 @@ export const AllTasks = () => {
       return task.completed;
     }
 
-    if (filter === "overdue tasks" && taskDate < currentDay && !task.completed) {
+    if (filter === "overdue tasks" && taskDate < today && task.completed=== false) {
       return task;
       
     }
@@ -103,7 +108,7 @@ export const AllTasks = () => {
       return task.category === "3";
     }
 
-    return true;
+
   });
 
   const sortedFilteredTasks = [...filteredTasks].sort(
