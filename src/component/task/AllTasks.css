@@ -3,10 +3,10 @@
     flex-direction: row;
 } */
 
-/*tried to see if i could style calendar in alltasks since its displayed in task page and i cant seem to style it in its own component*/
-.big-calendar{
-    margin-left: 200px;  
-    margin-top: 200px;
-    /* display: flex;
-    flex-direction: row; */
+.tittle-calendar{
+    text-align: center;
+    color:rgb(231, 158, 23);
+    text-decoration: overline underline;
+    text-decoration-color:  rgb(231, 158, 23);
+        
 }

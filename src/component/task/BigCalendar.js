@@ -29,7 +29,7 @@ export const BigCalendar = () => {
         });
     };
     fetchAllTasks();
-  }, []);
+  }, [tasks]);
 
   //moment localizer solves date internationalization/localization
   // Setup the localizer by providing the moment Object
@@ -55,12 +55,6 @@ export const BigCalendar = () => {
 
   return (
     <div className="calendar-container mt-5 " >
-        {/* <Calendar 
-        localizer={localizer}
-        events={taskList}
-        startAccessor="start"
-        endAccessor="end"
-      /> */}
       <Container >
       <Row >
         <Col className="calendar-container" style={{ width: 900, height: 700, }}>
@@ -76,17 +70,3 @@ export const BigCalendar = () => {
     </div>
   );
 };
-
-
-{/* <Container>
-      <Row>
-        <Col>
-        <Calendar 
-        localizer={localizer}
-        events={taskList}
-        startAccessor="start"
-        endAccessor="end"
-      />
-        </Col>
-      </Row>
-    </Container> */}

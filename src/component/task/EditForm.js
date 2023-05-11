@@ -17,7 +17,7 @@ export const EditForm = ({task,fetchAllTasks, handleTaskCompletion}) => {
   const [editStartTime, setEditStartTime] = useState(task.startTime);
   const [editEndTime, setEditEndTime] = useState(task.endTime);
   const [editCompleted, setEditCompleted] = useState(task.completed);
-  const [selectTaskId, setSelectedTaskId] = useState(task.id)
+  // const [selectTaskId, setSelectedTaskId] = useState(task.id)
  
 
 /*Pass the task.id(a number) to the handleTaskCompletion function in AllTasks(calls it taskId) so it can compare if the the task array to find the selected task*/

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Dropdown,Container,Col,Row, Modal,Button } from "react-bootstrap";
 import { EditForm } from "./EditForm";
 import { BigCalendar } from "./BigCalendar";
-import Alert from 'react-bootstrap/Alert';
+
 
 export const AllTasks = () => {
   const [tasks, setTasks] = useState([]);
@@ -129,7 +129,7 @@ export const AllTasks = () => {
   }
 
   return (
-    <><h1 className="mt-5">~ My Calendar ~</h1>
+    <><h1 className=" tittle-calendar mt-5">~ My Calendar ~</h1>
       <BigCalendar className="big-calendar"/>
 
       <Dropdown className="dropdown d-grid gap-2 mt-3">

@@ -68,7 +68,7 @@ export const TaskForm = ({ fetchAllTasks}) => {
       deadline: task.deadline,
       estimatedTime: task.estimatedTime,
       actualTime: task.actualTime,
-      starTime: task.startTime,
+      startTime: task.startTime,
       endTime: task.endTime,
       completed: false,
     };

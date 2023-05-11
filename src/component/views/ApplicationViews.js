@@ -4,6 +4,7 @@ import { AllTasks } from "../task/AllTasks";
 import VisualLineGraph from "../datavisual/VisualLineGraph";
 import VisualPieChart from "../datavisual/VisualPieChart";
 import { HomePage } from "../task/HomePage";
+import { VisualContainer } from "../datavisual/VisualContainer";
 
 
 
@@ -24,8 +25,9 @@ export const ApplicationViews = () => {
       <Route path="tasks" element={<AllTasks />} />
       <Route path="visuals" element={
       <>
-      <VisualLineGraph />
-      <VisualPieChart />
+      <VisualContainer />
+      {/* <VisualLineGraph />
+      <VisualPieChart /> */}
       </>
       }/>
     </Routes>

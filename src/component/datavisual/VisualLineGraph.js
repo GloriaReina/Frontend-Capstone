@@ -126,14 +126,17 @@ console.log(averageEstTime);
         <Row>
           <Col  className="line-chart-container">
             <Line data={data} options={options} />
-          </Col>
-          <Col xs={8}>
+          </Col>         
+        </Row>
+      </Container>
+      <Container>
+        <Row>
+        <Col >
           <Card className="mt-5 ">
-      {/* <Card.Header>Featured</Card.Header> */}
+      <Card.Header>Time Management Insight</Card.Header>
       <Card.Body>
-        <Card.Title>Special title treatment</Card.Title>
         <Card.Text>
-          With supporting text below as a natural lead-in to additional content.
+          Graph estimated task completion time vs actual task completion time. 
         </Card.Text>
         {/* <Button variant="primary">Go somewhere</Button> */}
       </Card.Body>

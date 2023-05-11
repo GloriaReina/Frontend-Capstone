@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import { Doughnut } from 'react-chartjs-2';
-import { Container, Row, Col } from "react-bootstrap";
+import { Container, Row, Col, Card } from "react-bootstrap";
 import "./VisualPieChart.css"
 
 ChartJS.register(ArcElement, Tooltip, Legend);
@@ -84,6 +84,21 @@ filterTaskArrayData.forEach((task) => {
         <Row>
           <Col className="line-chart-container">
           <Doughnut data={data} />
+          </Col>
+        </Row>
+      </Container>
+      <Container>
+        <Row>
+        <Col >
+          <Card className="mt-5 ">
+      <Card.Header>Energy Expenditure Insight</Card.Header>
+      <Card.Body>
+        <Card.Text>
+          Visualize amount of time (min) spent in each category in past week.
+        </Card.Text>
+        {/* <Button variant="primary">Go somewhere</Button> */}
+      </Card.Body>
+    </Card>
           </Col>
         </Row>
       </Container>

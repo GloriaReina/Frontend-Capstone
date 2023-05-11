@@ -95,7 +95,7 @@ the getDate method returns the day of the month based on the local time zone of 
   return (
     <>
       
-        <h1 className="mt-5">~ Tasks due today ~</h1>
+        <h1 className="title mt-5">~ Tasks due today ~</h1>
         {sortedFilteredTasks.map((task) => (
           <>
             <div className="today-task-container">
