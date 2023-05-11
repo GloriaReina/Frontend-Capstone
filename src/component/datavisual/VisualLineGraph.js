@@ -76,13 +76,13 @@ export const VisualLineGraph = () => {
 
 /*----------------------------------------------------------------------*/
 const estTimeArray= tasksPastWeek.map((task) => task.estimatedTime && task.deadline)
-console.log(estTimeArray)
+// console.log(estTimeArray)
 
 const sum = estTimeArray.reduce((accumulator, currentValue) => accumulator + currentValue, 0);
 
 const averageEstTime = sum / estTimeArray.length;
 
-console.log(averageEstTime);
+// console.log(averageEstTime);
 
 /*----------------------------------------------------------------------*/
   // Map filterTaskArrayData array to create the data format expected by Chart.js

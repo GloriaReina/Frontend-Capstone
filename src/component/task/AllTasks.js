@@ -2,7 +2,9 @@ import React, { useState, useEffect } from "react";
 import { Dropdown,Container,Col,Row, Modal,Button } from "react-bootstrap";
 import { EditForm } from "./EditForm";
 import { BigCalendar } from "./BigCalendar";
-
+// import moment from "moment";
+import moment from 'moment-timezone';
+import "./AllTasks.css";
 
 export const AllTasks = () => {
   const [tasks, setTasks] = useState([]);
@@ -31,13 +33,35 @@ export const AllTasks = () => {
     fetchAllTasks();
   }, []);
 
+
+
+
+// create an array of incompleted tasks whose dates are past current day  
+  const tasksPastDeadline = tasks.filter((task) => {
+    const taskDate = moment(task.deadline)
+    const currentDay = moment()
+  
+    if(taskDate < currentDay && task.completed=== false){
+    return task; 
+  }
+  })
+  console.log("outside filter",tasksPastDeadline)
+ 
+
+
+
+
   /* 
     When user selects an option from the dropdown menu, the onclick event will cause the state variable to be updated to one of the conditional statements below
 
     filtered tasks variable that will hold an array of tasks based off of whatever condition is met
     
     */
+
   const filteredTasks = tasks.filter((task) => {
+    const taskDate = moment(task.deadline)
+    const currentDay = moment()
+
     if (filter === "incomplete tasks") {
       return !task.completed;
     }
@@ -45,6 +69,12 @@ export const AllTasks = () => {
     if (filter === "complete tasks") {
       return task.completed;
     }
+
+    if (filter === "overdue tasks" && taskDate < currentDay && !task.completed) {
+      return task;
+      
+    }
+    // console.log("inside filter",taskDate)
 
     if (filter === "urgency level 1") {
       return task.urgencyLevel === "1";
@@ -80,9 +110,7 @@ export const AllTasks = () => {
     (a, b) => a.urgencyLevel - b.urgencyLevel
   );
 
-  // const sortedFilteredTasksDate = [...filteredTasks].sort(
-  //   (a, b) => a.deadline - b.deadline
-  // );
+ 
 
   /*value of taskId(can have any name) comes from  task.id property of the task object thats selected when user click its checkbox
 
@@ -136,11 +164,15 @@ export const AllTasks = () => {
           <strong>Select Task Display View</strong>
         </Dropdown.Toggle>
         <Dropdown.Menu>
+          
           <Dropdown.Item onClick={() => setFilter("incomplete tasks")}>
             Incomplete tasks
           </Dropdown.Item>
           <Dropdown.Item onClick={() => setFilter("complete tasks")}>
             Completed tasks
+          </Dropdown.Item>
+          <Dropdown.Item onClick={() => setFilter("overdue tasks")}>
+            Overdue tasks
           </Dropdown.Item>
           <Dropdown.Item onClick={() => setFilter("urgency level 1")}>
             Urgency Leve 1 tasks

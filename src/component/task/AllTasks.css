@@ -11,3 +11,17 @@
         
 }
 
+.submit-task-button {
+    border: none;
+        background-color: white;
+        padding: 5px;
+        margin: 0.3rem 0;
+        border-radius: 5px;
+        cursor: pointer;
+        color: #ee6b24;
+      }
+
+.add-task-close-button{
+    text-align: right;
+}
+      

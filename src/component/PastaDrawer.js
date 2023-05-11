@@ -1,3 +1,55 @@
+//   const currentDate = new Date();
+//   const date= currentDate.getDate()
+//     console.log(date)
+//   const incompletedTasksPastDeadline = tasks.filter(task => {
+//   const deadlineDate = new Date(task.deadline);
+//   const dateDeadline= deadlineDate.getDate()
+  
+//   return (!task.completed && date < dateDeadline);
+// });
+
+// console.log(incompletedTasksPastDeadline);
+
+
+
+// Assuming you have a specific timezone for your tasks, e.g., 'America/New_York'
+// const taskTimezone = 'America/New_York';
+
+// // Function to compare task deadlines with the current date, considering timezones
+// const isTaskPastDeadline = (task) => {
+//   const taskDeadline = moment.tz(task.deadline, taskTimezone);
+//   const currentDateTime = moment.tz(new Date(), taskTimezone);
+
+//   return taskDeadline.isBefore(currentDateTime);
+// };
+
+// // Filter the tasks based on the past deadline
+// const pastDeadlineArray = tasks.filter(isTaskPastDeadline);
+
+// console.log(pastDeadlineArray);
+
+
+
+
+// const pastDeadlineArray = task.filter(
+//   (task) => task.completed === false && task.actualTime !== "" 
+// );
+
+// /*From filteredTaskArrayDay--->Only select tasks past current day. */
+
+// const tasksPastDeadline = filterTaskArrayData.filter((task) => {
+//   //create a new moment object for each task's deadline property
+
+//   const taskDate = moment(task.deadline);
+
+//   // create a new moment object representing current day 
+
+//   const currentDay = moment()
+
+//   // compare each taskDate to currentDay using the isAfter() method. If taskDate is after currentDay, the task is included in the filtered array
+
+//   return taskDate.isBefore(currentDay);
+// });
 
  
 //    <Container >
