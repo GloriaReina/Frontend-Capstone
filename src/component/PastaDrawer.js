@@ -1,23 +1,23 @@
 
  
-   <Container >
-   <Row>
-     <Col  className="line-chart-container">
-       <Line data={data} options={options} />
-     </Col>
-     <Col >
-     <Card className="mt-5 ">
- <Card.Header>Time Management Insight</Card.Header>
- <Card.Body>
-   <Card.Text>
-     Graph estimated task completion time vs actual task completion time. 
-   </Card.Text>
-   {/* <Button variant="primary">Go somewhere</Button> */}
- </Card.Body>
-</Card>
-     </Col>
-   </Row>
- </Container>
+//    <Container >
+//    <Row>
+//      <Col  className="line-chart-container">
+//        <Line data={data} options={options} />
+//      </Col>
+//      <Col >
+//      <Card className="mt-5 ">
+//  <Card.Header>Time Management Insight</Card.Header>
+//  <Card.Body>
+//    <Card.Text>
+//      Graph estimated task completion time vs actual task completion time. 
+//    </Card.Text>
+//    {/* <Button variant="primary">Go somewhere</Button> */}
+//  </Card.Body>
+// </Card>
+//      </Col>
+//    </Row>
+//  </Container>
  
  /*Function that filters the list of tasks based on the current date & returns a new array that contains only the tasks that are due on the current date.*/
  const filterTasksByDate = () => {

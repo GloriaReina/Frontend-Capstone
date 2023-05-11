@@ -129,12 +129,11 @@ export const AllTasks = () => {
   }
 
   return (
-    <><h1 className=" tittle-calendar mt-5">~ My Calendar ~</h1>
+    <><h1 className=" tittle-calendar mt-5 ">~ My Calendar ~</h1>
       <BigCalendar className="big-calendar"/>
-
-      <Dropdown className="dropdown d-grid gap-2 mt-3">
-        <Dropdown.Toggle variant="outline-warning" size="sm" className="dropdown-basic  ">
-          Select Task Display View
+      <Dropdown className="dropdown d-grid gap-2 mt-5">
+        <Dropdown.Toggle variant="outline-success" size="sm" className="dropdown-basic  ">
+          <strong>Select Task Display View</strong>
         </Dropdown.Toggle>
         <Dropdown.Menu>
           <Dropdown.Item onClick={() => setFilter("incomplete tasks")}>
@@ -165,7 +164,7 @@ export const AllTasks = () => {
             Work-Life Tasks
           </Dropdown.Item>
         </Dropdown.Menu>
-
+        
         <Container className="task-container" > 
           {sortedFilteredTasks.map((task) => (
             <> 

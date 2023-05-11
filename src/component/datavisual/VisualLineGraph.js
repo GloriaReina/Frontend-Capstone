@@ -131,7 +131,7 @@ console.log(averageEstTime);
       </Container>
       <Container>
         <Row>
-        <Col >
+          <Col >
           <Card className="mt-5 ">
       <Card.Header>Time Management Insight</Card.Header>
       <Card.Body>

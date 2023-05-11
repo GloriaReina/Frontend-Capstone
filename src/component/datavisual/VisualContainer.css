@@ -1,5 +1,12 @@
 .visual-container{
     display: flex;
-    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    align-content: center;
+   
 }
 
+.visual-container, body{
+    background-color: rgb(238, 244, 239);
+
+}
