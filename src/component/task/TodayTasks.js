@@ -130,7 +130,7 @@ the getDate method returns the day of the month based on the local time zone of 
             </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <p><em>Fill in completion time to mark task as complete!</em></p>
+        <p>Fill in <em><u>completion time</u></em> to mark tasks as complete!</p>
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={() => setShowModal(false)}>Close</Button>
