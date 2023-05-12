@@ -1,7 +1,7 @@
 import { useState, useEffect} from "react";
 import { TaskForm } from "./TaskForm";
 import { TodayTasks } from "./TodayTasks";
-
+import "./TodayTasks.css";
 
 export const HomePage = ()=>{
     

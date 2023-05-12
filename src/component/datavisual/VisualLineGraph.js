@@ -88,13 +88,13 @@ const averageEstTime = sum / estTimeArray.length;
     labels: taskDates,
     datasets: [
       {
-        label: "Estimated Time",
+        label: "Task",
         data: tasksPastWeek.map((task) => task.estimatedTime),
         fill: false,
         borderColor: "#f00",
       },
       {
-        label: "Actual Time",
+        label: "Task",
         data: tasksPastWeek.map((task) => task.actualTime),
         fill: false,
         borderColor: "#83E077",
@@ -102,21 +102,47 @@ const averageEstTime = sum / estTimeArray.length;
     ],
   };
 
+  // const options = {
+  //   title: {
+  //     display: true,
+  //     text: "Task Time Analysis",
+  //   },
+  //   scales: {
+  //     yAxes: [
+  //       {
+  //         ticks: {
+  //           beginAtZero: true,
+  //         },
+  //       },
+  //     ],
+  //   },
+  // };
+
   const options = {
-    title: {
-      display: true,
-      text: "Task Time Analysis",
-    },
-    scales: {
-      yAxes: [
-        {
-          ticks: {
-            beginAtZero: true,
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      tooltip: {
+        callbacks: {
+          label: function (context) {
+            const datasetLabel =
+              context.dataset.label || '';
+            const task = tasksPastWeek[context.dataIndex];
+            const taskName = task.description;
+            const estimatedTime = task.estimatedTime;
+            const actualTime = task.actualTime;
+
+            return `${datasetLabel}: ${taskName} - Estimated: ${estimatedTime}min, Actual: ${actualTime}min`;
           },
         },
-      ],
+      },
     },
-  };
+    scales: {
+      y: {
+        beginAtZero: true,
+      },
+    },
+  }; 
 
   return (
     <div className="chart-container mt-5 " style={{ width: 600, height: 300 }}>

@@ -1,6 +1,6 @@
 import { useState } from "react";
-import {Button,Form,Container,Row,Col,CloseButton, Modal} from "react-bootstrap";
-
+import {Button,Form,Container,Row,Col, Modal} from "react-bootstrap";
+import "./TodayTasks.css";
 
 export const TaskForm = ({ fetchAllTasks}) => {
 
@@ -111,7 +111,7 @@ export const TaskForm = ({ fetchAllTasks}) => {
                 size="sm"
                 onClick={handleShow}
               >
-                + New Task
+               <strong> + New Task </strong>
               </Button>
         </div>
       <Modal show={show} onHide={handleClose}>
