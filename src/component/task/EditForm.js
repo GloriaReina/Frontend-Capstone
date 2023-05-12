@@ -162,10 +162,10 @@ const handleCheckboxChange = (id) => {
                 onChange={(event) => setEditUrgency(event.target.value)}
               >
                 <option value="">-- Select Urgency Level --</option>
-                <option value="1">Level 1: Urgent & only you can do</option>
-                <option value="2">Level 2: Urgent but can delegate</option>
-                <option value="3">Level 3: Not Urgent but mandatory</option>
-                <option value="4">Level 4: Not Urgent and optional</option>
+                <option value="1">Level 1: Important & Urgent </option>
+                <option value="2">Level 2: Important & Not Urgent</option>
+                <option value="3">Level 3: Not Important but Urgent</option>
+                <option value="4">Level 4: Not Important and Not Urgent</option>
               </Form.Control>
             </Col>
             </Form.Group>
