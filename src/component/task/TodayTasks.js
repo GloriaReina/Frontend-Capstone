@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { EditForm } from "./EditForm";
 import { Container, Col, Row, Modal, Button } from "react-bootstrap";
 import "./TodayTasks.css";
-import { isSameDay } from "date-fns";
+
 //recieved props from homepage
 export const TodayTasks = ({ tasks, fetchAllTasks, setTasks }) => {
   const [showAlert, setShowAlert] = useState(false);

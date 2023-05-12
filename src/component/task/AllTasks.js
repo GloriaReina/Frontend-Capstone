@@ -165,7 +165,7 @@ console.log("bool:",taskDate < today)
     <><h1 className=" tittle-calendar mt-5 ">~ My Calendar ~</h1>
       <BigCalendar className="big-calendar"/>
       <Dropdown className="dropdown d-grid gap-2 mt-5">
-        <Dropdown.Toggle variant="outline-success" size="sm" className="dropdown-basic  ">
+        <Dropdown.Toggle variant="outline-success" size="sm" className="dropdown-basic">
           <strong>Select Task Display View</strong>
         </Dropdown.Toggle>
         <Dropdown.Menu>

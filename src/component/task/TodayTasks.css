@@ -22,7 +22,10 @@
     background-color: rgb(234, 165, 226);
   }
 
-
+.add-new-task-button{
+  width: 700px;
+  margin: auto;
+}
   /* .today-task {
     background-color:  #f0ebe9eb;
     position: fixed;
