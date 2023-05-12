@@ -180,16 +180,16 @@ console.log("bool:",taskDate < today)
             Overdue tasks
           </Dropdown.Item>
           <Dropdown.Item onClick={() => setFilter("urgency level 1")}>
-            Urgency Leve 1 tasks
+            Urgency Level 1 tasks
           </Dropdown.Item>
           <Dropdown.Item onClick={() => setFilter("urgency level 2")}>
-            Urgency Leve 2 tasks
+            Urgency Level 2 tasks
           </Dropdown.Item>
           <Dropdown.Item onClick={() => setFilter("urgency level 3")}>
-            Urgency Leve 3 tasks
+            Urgency Level 3 tasks
           </Dropdown.Item>
           <Dropdown.Item onClick={() => setFilter("urgency level 4")}>
-            Urgency Leve 4 tasks
+            Urgency Level 4 tasks
           </Dropdown.Item>
           <Dropdown.Item onClick={() => setFilter("Self Care Tasks")}>
             Self Care Tasks
